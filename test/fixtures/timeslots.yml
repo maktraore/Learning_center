@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_time: 2017-06-11 16:19:36
+  end_time: 2017-06-11 16:19:36
+  date: 2017-06-11
+  semester: MyString
+  approved: false
+
+two:
+  start_time: 2017-06-11 16:19:36
+  end_time: 2017-06-11 16:19:36
+  date: 2017-06-11
+  semester: MyString
+  approved: false

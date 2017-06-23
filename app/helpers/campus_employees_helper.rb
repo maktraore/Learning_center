@@ -1,0 +1,2 @@
+module CampusEmployeesHelper
+end

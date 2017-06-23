@@ -1,0 +1,28 @@
+<h2>Signup for a tutor account!</h2>
+<%= form_tag "/employees", method: :post  do %>
+ <div > Full name: <input type="text" name = "name"></div>
+<div class ="right"> Email: <input type="email" name = "email"></div>
+<div class ="right"> password: <input type="password" name = "password"></div>
+<div class ="right"> password confirmation: <input type="password" name = "passconfirm"></div>
+<p>Phone number: <input type="text" name="phone_number"></p>
+<p>Bio: <input type="textarea" name="bio"></p>
+<p>Courses Tutored: <input type="textarea" name="courses_tutored_1" >
+<select name="department_1">
+        <option  selected value> -- select an option -- </option>
+        <% @subjects.each do |subject| %>
+          <option value="<%= subject.id%>"><%= subject.department  %></option>
+        <% end %>
+      </select>
+<p>Courses Tutored: <input type="textarea" name="courses_tutored_2" >
+    <select name="department_2">
+        <option  selected value> -- select an option -- </option>
+            <% @subjects.each do |subject| %>
+              <option value="<%= subject.id%>"><%= subject.department  %></option>
+            <% end %>
+          </select>
+</p>
+<p>Image: <input type="text" name="image" ></p>
+<p>Approved: <input type="text" name="approved" ></p>
+<p>Admin: <input type="text" name="admin" ></p>
+<p><input class="btn"  type="submit" value="Signup"></p>
+<% end %>

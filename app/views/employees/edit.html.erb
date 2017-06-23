@@ -1,0 +1,28 @@
+<div class="container">
+<h3>Edit Tutor's info</h3>
+<%= form_tag "/employees/#{@employee.id}", method: :patch do %>
+<p>Full Name: <input type="text" name="full_name" value="<%= @employee.full_name %>"></p>
+<p>Email: <input type="email" name="email" value="<%= @employee.email %>"></p>
+<p>Phone number: <input type="text" name="phone_number" value="<%= @employee.phone_number %>"></p>
+<p>Bio: <input type="textarea" name="bio" value="<%= @employee.bio %>"></p>
+<p>Courses Tutored: <input type="textarea" name="courses_tutored_1" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).map{|course| course.courses_tutored}.first %>">
+<select name="department_1">
+        <option  selected value> -- select an option -- </option>
+        <% @subjects.each do |subject| %>
+          <option value="<%= subject.id%>"><%= subject.department  %></option>
+        <% end %>
+      </select>
+<p>Courses Tutored: <input type="textarea" name="courses_tutored_2" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).map{|course| course.courses_tutored}[1] %>"> 
+    <select name="department_2">
+        <option  selected value> -- select an option -- </option>
+            <% @subjects.each do |subject| %>
+              <option value="<%= subject.id%>"><%= subject.department  %></option>
+            <% end %>
+          </select>
+</p>
+<p>Image: <input type="text" name="image" value="<%= @employee.image %>"></p>
+<p>Approved: <input type="text" name="approved" value="<%= @employee.approved %>"></p>
+<p>Admin: <input type="text" name="admin" value="<%= @employee.admin %>"></p>
+<p><input class="btn"  type="submit"></p>
+<% end %>
+</div>

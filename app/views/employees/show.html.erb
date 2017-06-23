@@ -1,0 +1,27 @@
+<h1>This is <%= @employee.full_name %>'s page</h1>
+<a href="/employees/<%= @employee.id %>/edit">Edit Profile</a> |
+<a href="/employees/<%= @employee.id %>/schedules/all/edit">Edit Schedule</a> |
+<a href="employees/<%= @employee.id %>/schedules/new">Submit upcoming schedule</a> |
+<a href="#">Update your password</a> 
+<div>Bio<textarea class="form-control"  rows="3" columns="4"></textarea></div>
+<%= form_tag "/employees/#{@employee.id}/bio", method: :patch do %>
+<p class="left"><a href="#">Edit bio</a> <a href="#">Submit</a></p>
+
+<% end %>
+
+<div class="row well">
+<% @employee.locations.each_slice(3) do |location_slice|  %>
+<div class="col-md-4">
+<% location_slice.each do |location| %>
+    <h4><%= location.name %></h4>
+    <% location.timeslots.each do |time|%>
+     <p><%= time.days %></p>
+     <p>
+      <%= time.start_time %>-<%= time.end_time %>
+      </p>
+       <% end %>
+       </div>
+       <% end %>
+       </div>
+    <%end %>
+

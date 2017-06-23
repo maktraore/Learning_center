@@ -1,0 +1,26 @@
+<h4>Please propose your schedule for the coming semester</h4>
+<%= form_tag "/employees/#{@employee.id}/schedules", method: :post do %>
+
+  Semester: <select name="semester">
+        <% @semesters.each do |semester| %>
+          <option value="<%= semester %>"><%= semester %></option>
+        <% end %>
+    </select>
+    <% 4.times do |i| %>
+<p>Day(s): <input type="text" name="day<%= i+1 %>" > 
+      Campus: <select name="location_id_<%= i+1 %>">
+        <option value>--select location--</option>
+        <% @locations.each do |location| %>
+          <option value="<%= location.id %>"><%= location.name %></option>
+        <% end %>
+      </select>
+</p>
+<% 3.times do |j| %>
+  <p>
+       Start time: <input type="text" name="day<%= i+1 %>_start_time<%= j+1 %>" >
+       End time: <input type="text" name="day<%= i+1 %>_end_time<%= j+1 %>" >  
+   </p>
+          <% end %>
+       <% end %>
+       <p><input class="btn" type="submit" value="submit"></p>
+<% end %>
