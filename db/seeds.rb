@@ -42,12 +42,12 @@
 #   EmployeeSubject.create(employee_id: e.id, subject_id: Subject.pluck(:id).sample, courses_tutored: "Math116 Math105")
 #   EmployeeSubject.create(employee_id: e.id, subject_id: Subject.pluck(:id).sample)
 # end
-CampusEmployee.destroy_all
-Employee.all.each do |e|
-  timeslots = Location.pluck(:id).shuffle
- CampusEmployee.create(employee_id: e.id, location_id: timeslots.pop)
- CampusEmployee.create(employee_id: e.id, location_id: timeslots.pop)
-end
+# CampusEmployee.destroy_all
+# Employee.all.each do |e|
+#   timeslots = Timeslot.pluck(:id).shuffle
+#   EmployeeTimeSlot.create(employee_id: e.id, timeslot_id: timeslots.pop)
+#   EmployeeTimeSlot.create(employee_id: e.id, timeslot_id: timeslots.pop)
+# end
 # Subject.all.each do |e|
   # CampusSubject.create!(location_id: Location.pluck(:id).sample, subject_id: e.id)
   # CampusSubject.create!(location_id: Location.pluck(:id).sample, subject_id: e.id)

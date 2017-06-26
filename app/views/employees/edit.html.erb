@@ -9,16 +9,17 @@
 <select name="department_1">
         <option  selected value> -- select an option -- </option>
         <% @subjects.each do |subject| %>
-          <option value="<%= subject.id%>"><%= subject.department  %></option>
+          <option <%= 'selected' if subject.department ==  @employee.subjects.order(:created_at).first.department  %> value="<%= subject.id%>"><%= subject.department  %></option>
         <% end %>
       </select>
 <p>Courses Tutored: <input type="textarea" name="courses_tutored_2" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).map{|course| course.courses_tutored}[1] %>"> 
     <select name="department_2">
         <option  selected value> -- select an option -- </option>
             <% @subjects.each do |subject| %>
-              <option value="<%= subject.id%>"><%= subject.department  %></option>
+              <option <%= 'selected' if subject.department == @employee.subjects.order(:created_at).second.department%> value="<%= subject.id%>"><%= subject.department  %></option>
             <% end %>
           </select>
+          <a href="#">delete</a>
 </p>
 <p>Image: <input type="text" name="image" value="<%= @employee.image %>"></p>
 <p>Approved: <input type="text" name="approved" value="<%= @employee.approved %>"></p>

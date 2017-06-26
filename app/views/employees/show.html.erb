@@ -13,7 +13,7 @@
 <% @employee.locations.each_slice(3) do |location_slice|  %>
 <div class="col-md-4">
 <% location_slice.each do |location| %>
-    <h4><%= location.name %></h4>
+    <h4><%= location.name if location.timeslots.where(approved: false).any? %></h4>
     <% location.timeslots.each do |time|%>
      <p><%= time.days %></p>
      <p>
