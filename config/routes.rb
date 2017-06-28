@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get "/surveys", to:'surveys#index'
+  post "/surveys", to: 'surveys#create'
+
   root  'employees#index', as: 'home'  
   resources :employees do
     resources :schedules

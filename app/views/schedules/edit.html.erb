@@ -2,29 +2,46 @@
 
 <h4>Please Edit your schedule for the coming semester</h4>
 <%= form_tag "/employees/#{@employee.id}/schedules/all", method: :patch do %>
-Semester: <select name="semester">
-        <% @semesters.each do |semester| %>
-          <option value="<%= semester %>"><%= semester %></option>
-        <% end %>
-    </select>
-    <% for i in 1..4#4.times do |i| %>
-<p>Day(s): <input type="text" name="day<%= i %>" > 
-      Campus: <select name="location_id_<%= i %>">
-        <% @locations.each do |location| %>
+      Semester: <select name="semester">
+                              <% @semesters.each do |semester| %>
+                                <option ><%= semester %></option>
+                              <% end %>
+                       </select>
+<% for i in 1..4#4.times do |i| %>
+    <% if @timeslots[i-1] %>
+        <p>Day(s): <input type="text" value="<%=@employee.timeslots[i-1].days  %>" name="day<%= i %>" > 
+    <% else %>
+        <p>Day(s): <input type="text" name="day<%= i %>" > 
+
+    <% end %>
+    Campus: <select name="location_id_<%= i %>">
+     <% Location.all.each do |location| %>
+        <% if @locations[i-1] %>
+          <option value="<%= location.id %>"><%= @locations[i-1].name %></option>
+        <% else %>
           <option value="<%= location.id %>"><%= location.name %></option>
         <% end %>
-      </select>
-      <%  if i <= @timeslots.length %>
-      Approve Schedule: <input type="text" name="approved<%= i %>" value="<%=@timeslots[i-1].approved  %>">
       <% end %>
-</p>
-<% 3.times do |j| %>
-  <p>
-       Start time: <input type="text" name="day<%= i %>_start_time<%= j+1 %>" >
+      </select>
+     <%  if i <= @timeslots.length %>
+        Approve Schedule: <input type="text" name="approved<%= i %>" value="<%=@timeslots[i-1].approved  %>">
+      <% end %>
+      </p>
+    <% 3.times do |j| %>
+          <% if @timeslots[i-1] && @employee.timeslots.where(days: @timeslots[i-1].days)[j] %>
+             <p>
+
+                 Start time: <input type="text" value="<%= @employee.timeslots.where(days: @timeslots[i-1].days)[j].start_time %>" name="day<%= i %>_start_time<%= j+1 %>" >
+                 End time: <input type="text" value="<%= @employee.timeslots.where(days: @timeslots[i-1].days)[j].end_time %>"  name="day<%= i %>_end_time<%= j+1 %>" >  
+             </p>
+          <% else %>
+    <p>
+       Start time: <input type="text"  name="day<%= i %>_start_time<%= j+1 %>" >
        End time: <input type="text" name="day<%= i %>_end_time<%= j+1 %>" >  
    </p>
-          <% end %>
-        <% end %>
+      <% end %>
+   <% end %>
+<% end %>
        <p><input class="btn" type="submit" value="submit"></p>
 <% end %>
 

@@ -6,7 +6,7 @@
       end
       def edit
         @employee= Employee.find_by(id: params[:employee_id])
-        @locations = Location.all
+        @locations = @employee.locations
         @semesters = ["fall","spring", "summer", "other"]
         @timeslots = @employee.timeslots
         @employee_subject = EmployeeSubject.find_by(id: params[:id])

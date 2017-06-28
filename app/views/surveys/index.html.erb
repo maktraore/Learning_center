@@ -1,0 +1,67 @@
+<h3>Thank you in advance for taking 5 minutes of your time filling out this survey</h3>
+<%= @survey.errors.full_messages.each do |msg| %>
+<p><%= msg %></p>
+<% end %>
+<%= form_tag "/surveys", method: :post do %>
+<p>Email: <input type="email" name="student_email"></p>
+<ol>
+  <p><li>At campus did your tutoring session take place?</li></p>
+  <p>
+  <% Location.all.each do |location| %>
+  <input type="radio" name="question1" value="<%= location.name %>"> <%= location.name %>
+  <% end %>
+  </p>
+  <p><li>What subject were you tutored today</li></p>
+  <% Subject.all.each do |subject| %>
+  <input type="radio" name="question2" value="<%= subject.department %>"> <%= subject.department %>
+  <% end %>
+  <p><li>How did you first hear about Learning center?</li></p>
+  <input type="radio" name="question3" value="Teacher">Teacher
+  <input type="radio" name="question3" value="Librarian"> Librarian
+  <input type="radio" name="question3" value="Fellow Student"> Fellow student
+  <input type="radio" name="question3" value="College website"> College website
+  <input type="radio" name="question3" value="other"> Other
+  <p><li>Are you a</li></p>
+  <input type="radio" name="question4" value="Freshman">Freshman
+  <input type="radio" name="question4" value="Sophomore">Sophomore
+  <input type="radio" name="question4" value="Junior">Junior
+  <input type="radio" name="question4" value="Senior">Senior
+  <input type="radio" name="question4" value="Grad Student">Grad Student
+  <input type="radio" name="question4" value="Other">Other
+  <p><li>My tutor was knowledgeable about the subject being tutored</li></p>
+  <input type="radio" name="question5" value="Strongly agree">Strongly agree
+  <input type="radio" name="question5" value="Agree">Agree
+  <input type="radio" name="question5" value="Neutral">Neutral
+  <input type="radio" name="question5" value="Disagree">Disagree
+  <input type="radio" name="question5" value="Strongly disagree">Strongly disagree
+  <p><li>After my session I feel more comfortable about the subject under discussion</li></p>
+  <input type="radio" name="question6" value="Strongly agree">Strongly agree
+  <input type="radio" name="question6" value="Agree">Agree
+  <input type="radio" name="question6" value="Neutral">Neutral
+  <input type="radio" name="question6" value="Disagree">Disagree
+  <input type="radio" name="question6" value="Strongly disagree">Strongly disagree
+  <p><li>Based on my experience today, I will recommend the learning center service to another student</li></p>
+  <input type="radio" name="question7" value="Strongly agree">Strongly agree
+  <input type="radio" name="question7" value="Agree">Agree
+  <input type="radio" name="question7" value="Neutral">Neutral
+  <input type="radio" name="question7" value="Disagree">Disagree
+  <input type="radio" name="question7" value="Strongly disagree">Strongly disagree
+  <p><li>Over all my experience at the learning center was</li></p>
+  <input type="radio" name="question8" value="Excellent">Excellent
+  <input type="radio" name="question8" value="Good">Good
+  <input type="radio" name="question8" value="Fair">Fair
+  <input type="radio" name="question8" value="Poor">Poor
+ disagree
+ <p><li>Why did come to this tutoring session today?</li> </p>
+  <textarea name="question10" icols="60" rows="4"></textarea>
+  <p><li>What did learn that was new during this tutoring session?</li></p>
+  <textarea name="question11" icols="60" rows="4"></textarea>
+  <p><li> What would do next to ensure that you do well in this class?</li></p>
+  <textarea name="question12" icols="60" rows="4"></textarea>
+  <p><li>What else could we do to help you do well in this class</li></p>
+    <textarea name="question9" icols="60" rows="4"></textarea>
+  <p><li>Additional comments</li></p>
+  <textarea name="question13" icols="60" rows="4"></textarea>
+</ol>
+<input type="submit" value="Send survey">
+<% end %>

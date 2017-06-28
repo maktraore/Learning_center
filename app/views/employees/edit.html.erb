@@ -16,10 +16,10 @@
     <select name="department_2">
         <option  selected value> -- select an option -- </option>
             <% @subjects.each do |subject| %>
-              <option <%= 'selected' if subject.department == @employee.subjects.order(:created_at).second.department%> value="<%= subject.id%>"><%= subject.department  %></option>
+              <option <%= 'selected' if subject.department %> value="<%= subject.id%>"><%= subject.department  %></option>
             <% end %>
           </select>
-          <a href="#">delete</a>
+          <!-- <a href="/employees/<%# e.id %>" data-method="delete" >delete</a> -->
 </p>
 <p>Image: <input type="text" name="image" value="<%= @employee.image %>"></p>
 <p>Approved: <input type="text" name="approved" value="<%= @employee.approved %>"></p>
