@@ -15,5 +15,6 @@ class SubjectsController < ApplicationController
   end
 
   def destroy
+    
   end
 end

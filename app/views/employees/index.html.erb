@@ -8,7 +8,7 @@
 <a href="/employees/<%= e.id %>/edit">Edit Profile</a> |
 <a href="/employees/<%= e.id %>/schedules/all/edit">Edit Schedule</a> |
 <a href="employees/<%= e.id %>/schedules/new">Submit upcoming schedule</a> |
-<a href="/employees/<%= e.id %>" data-method="delete" >Delete Tutor</a>
+<a href="/employees/<%= e.id %>" data-method="delete" data-confirm="Blah blah" >Delete Tutor</a>
 </a>
 </p>
 <%= EmployeeSubject.where(employee_id: e.id).map{|course| course.courses_tutored}.join(" ") %>

@@ -5,20 +5,25 @@
 <p>Email: <input type="email" name="email" value="<%= @employee.email %>"></p>
 <p>Phone number: <input type="text" name="phone_number" value="<%= @employee.phone_number %>"></p>
 <p>Bio: <input type="textarea" name="bio" value="<%= @employee.bio %>"></p>
-<p>Courses Tutored: <input type="textarea" name="courses_tutored_1" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).map{|course| course.courses_tutored}.first %>">
+<p>Courses Tutored: <input type="textarea" name="courses_tutored_1" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first.courses_tutored %>">
 <select name="department_1">
         <option  selected value> -- select an option -- </option>
         <% @subjects.each do |subject| %>
           <option <%= 'selected' if subject.department ==  @employee.subjects.order(:created_at).first.department  %> value="<%= subject.id%>"><%= subject.department  %></option>
         <% end %>
       </select>
-<p>Courses Tutored: <input type="textarea" name="courses_tutored_2" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).map{|course| course.courses_tutored}[1] %>"> 
+      <%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first.id %>
+      <%= link_to "delete", "/employee_subjects/#{EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first.id}", method: :delete %>
+<p>Courses Tutored: <input type="textarea" name="courses_tutored_2" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second.courses_tutored if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second %>"> 
     <select name="department_2">
         <option  selected value> -- select an option -- </option>
             <% @subjects.each do |subject| %>
               <option <%= 'selected' if subject.department %> value="<%= subject.id%>"><%= subject.department  %></option>
             <% end %>
           </select>
+          <% if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second %>
+          <%= link_to "delete", "/employee_subjects/#{EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second.id}", method: :delete %>
+          <% end %>
           <!-- <a href="/employees/<%# e.id %>" data-method="delete" >delete</a> -->
 </p>
 <p>Image: <input type="text" name="image" value="<%= @employee.image %>"></p>

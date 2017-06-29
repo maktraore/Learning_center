@@ -32,7 +32,8 @@
              <p>
 
                  Start time: <input type="text" value="<%= @employee.timeslots.where(days: @timeslots[i-1].days)[j].start_time %>" name="day<%= i %>_start_time<%= j+1 %>" >
-                 End time: <input type="text" value="<%= @employee.timeslots.where(days: @timeslots[i-1].days)[j].end_time %>"  name="day<%= i %>_end_time<%= j+1 %>" >  
+                 End time: <input type="text" value="<%= @employee.timeslots.where(days: @timeslots[i-1].days)[j].end_time %>"  name="day<%= i %>_end_time<%= j+1 %>" >  <button>X</button>
+                 <%= link_to "delete", "/employee_time_slots/#{@employee.timeslots.where(days: @timeslots[i-1].days)[j].employee_time_slots.find_by(employee_id: @employee.id).id}", method: :delete %>
              </p>
           <% else %>
     <p>
