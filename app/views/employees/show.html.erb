@@ -1,8 +1,8 @@
 <h1>This is <%= @employee.full_name %>'s page</h1>
 <a href="/employees/<%= @employee.id %>/edit">Edit Profile</a> |
 <a href="/employees/<%= @employee.id %>/schedules/all/edit">Edit Schedule</a> |
-<a href="employees/<%= @employee.id %>/schedules/new">Submit upcoming schedule</a> |
-<a href="#">Update your password</a> 
+<a href="/employees/<%= @employee.id %>/schedules/new">Submit upcoming schedule</a> |
+<a href="/newpassword">Update your password</a> 
 <div>Bio<textarea  rows="3" icols="4"></textarea></div>
 <%= form_tag "/employees/#{@employee.id}/bio", method: :patch do %>
 <p class="left"><a href="#">Edit bio</a> <a href="#">Submit</a></p>

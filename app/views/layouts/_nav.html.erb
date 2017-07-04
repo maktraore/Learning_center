@@ -19,18 +19,15 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tutors<span  class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Manhattan</a></li>
-            <li><a href="#">Doobs Ferry</a></li>
-            <li><a href="#">Bronx</a></li>
-            <li><a href="#">WhitePlains</a></li>
-            <li><a href="#">Yorktown</a></li>
-            <li><a href="#">Online</a></li>
+          <% Location.all.each do |location| %>
+            <li><a href="/employees?campus=<%= location.name %>"><%= location.name %></a></li>
+          <% end %>
           </ul>
         </li> <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Schedules<span class="caret"></span></a>
           <ul class="dropdown-menu">
           <% Subject.all.each do |s| %>
-            <li><a href="/Schedules"><%= s.department %></a></li>
+            <li><a href="/employees?department=<%= s.department %>"><%= s.department %></a></li>
           <% end %>
           </ul>
         </li> 

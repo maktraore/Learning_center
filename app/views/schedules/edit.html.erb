@@ -3,8 +3,15 @@
 <h4>Please Edit your schedule for the coming semester</h4>
 <%= form_tag "/employees/#{@employee.id}/schedules/all", method: :patch do %>
       Semester: <select name="semester">
+                              <% i=0 %>
                               <% @semesters.each do |semester| %>
+                              <% if  @timeslots.order(:created_at)[i] %>
+                                <option ><%= @timeslots.order(:created_at)[i].semester %></option>
                                 <option ><%= semester %></option>
+                                <% else %>
+                                <option ><%= semester %></option>
+                              <% end %>
+                              <% i= i+1 %>
                               <% end %>
                        </select>
 <% for i in 1..4#4.times do |i| %>
@@ -15,9 +22,11 @@
 
     <% end %>
     Campus: <select name="location_id_<%= i %>">
+     <% j = i %>
      <% Location.all.each do |location| %>
-        <% if @locations[i-1] %>
-          <option value="<%= location.id %>"><%= @locations[i-1].name %></option>
+        <% if @locations[j-1] %>
+          <option value="<%= location.id %>"><%= @locations[j-1].name %></option>
+          <% j=j+1 %>
         <% else %>
           <option value="<%= location.id %>"><%= location.name %></option>
         <% end %>

@@ -1,6 +1,12 @@
 class EmployeesController < ApplicationController
   def index
-    @employees=Employee.all
+    if params[:campus]
+      @employees = Location.find_by(name:params[:campus]).employees
+    elsif params[:department]
+      @employees = Subject.find_by(department:params[:department]).employees
+    else
+      @employees=Employee.all
+    end
   end
 
   def show
@@ -14,9 +20,10 @@ class EmployeesController < ApplicationController
   end
 
   def edit
-    @subjects= Subject.all
     @employee= Employee.find_by(id: params[:id])
-  end
+    @subjects= Subject.all
+    @emp_subjects_arr = @employee.subjects.order(:created_at).map{|subject| subject.department}
+  end 
   def update
     @employee = Employee.find_by(email: params[:email])
     
@@ -44,23 +51,30 @@ class EmployeesController < ApplicationController
     @employee.email = params[:email]
     @employee.image = params[:image]
     @employee.save
-     redirect_to "/"
      flash[:success] = "The Tutor information has been updated"
+     redirect_to "/"
   end
 
   def create
-    employee = Employee.new(full_name: params[:name], email: params[:email], password: params[:password], phone_number: params[:phone_number], bio: params[:bio], approved: params[:approved], admin: params[:admin])
-           employee.save
-    EmployeeSubject.create(employee_id: employee.id, subject_id:  params[:department_1], courses_tutored: params[:courses_tutored_1])
+    @employee = Employee.new(full_name: params[:name], email: params[:email], password: params[:password], phone_number: params[:phone_number], bio: params[:bio], approved: params[:approved], admin: params[:admin])
+           @employee.save
+    EmployeeSubject.create(employee_id: @employee.id, subject_id:  params[:department_1], courses_tutored: params[:courses_tutored_1])
         if !params[:courses_tutored_2].empty?
-            EmployeeSubject.create(employee_id: employee.id, subject_id:  params[:department_2], courses_tutored: params[:courses_tutored_2])
+            EmployeeSubject.create(employee_id: @employee.id, subject_id:  params[:department_2], courses_tutored: params[:courses_tutored_2])
         end
+ 
+
+        # Tell the UserMailer to send a welcome email after save
+        UserMailer.welcome_email(@employee).deliver_now
+ 
+      redirect_to "/employees" 
+    
       # session[:user_id] =employee.id
       # flash[:success] = "#{employee.name} has been sign up"
       # redirect_to "/login"
       # else
       # flash[:error] = "Please try again later"
-      redirect_to "/employees"
+      
   end
 
   def destroy

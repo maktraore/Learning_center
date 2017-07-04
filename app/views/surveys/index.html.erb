@@ -1,7 +1,4 @@
 <h3>Thank you in advance for taking 5 minutes of your time filling out this survey</h3>
-<%= @survey.errors.full_messages.each do |msg| %>
-<p><%= msg %></p>
-<% end %>
 <%= form_tag "/surveys", method: :post do %>
 <p>Email: <input type="email" name="student_email"></p>
 <ol>
@@ -63,5 +60,5 @@
   <p><li>Additional comments</li></p>
   <textarea required name="question13" icols="60" rows="4"></textarea>
 </ol>
-<input type="submit" value="Send survey">
+<input class="btn" type="submit" value="Send survey">
 <% end %>

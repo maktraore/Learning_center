@@ -3,7 +3,7 @@ class SurveysController < ApplicationController
     @survey = Survey.new
   end
   def create
-    Survey.create(
+    @user =Survey.create(
        student_email: params[:student_email],
         question1: params[:question1],
         question2: params[:question2],
@@ -21,6 +21,7 @@ class SurveysController < ApplicationController
         
       )
     redirect_to "/surveys"
+    UserMailer.survey_confirmation_email(@user).deliver_now
     # binding.pry
   end
 end

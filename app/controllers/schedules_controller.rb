@@ -1,6 +1,7 @@
   class SchedulesController < ApplicationController
       def index
-          @employee = Employee.find_by(id:params[:employee_id])
+        
+        @employee = Employee.find_by(id:params[:employee_id])
         @locations = Location.all
         @semesters = ["fall","spring", "summer", "other"]
       end
@@ -27,7 +28,7 @@
            employee_timeslot = EmployeeTimeSlot.where(employee_id: @employee.id).delete_all#.destroy_all
            campus_employee = CampusEmployee.where(employee_id: @employee.id).delete_all
             for i in 1..4
-               r = "approved"+i.to_s
+                   r = "approved"+i.to_s
                    for j in 1..3
                       x = "day"+i.to_s
                       y = "day"+i.to_s+"_start_time"+j.to_s
@@ -43,7 +44,11 @@
                              # timeslot.days = c 
                              # timeslot.semester = params[:semester]
                              # timeslot.location_id = location_id
-                             timeslot =Timeslot.create(start_time: b, end_time: c, days: a, semester: params[:semester], location_id: params[d].to_i, approved: params[r])
+                             if params[r]
+                             timeslot =Timeslot.update(start_time: b, end_time: c, days: a, semester: params[:semester], location_id: params[d].to_i, approved: params[r])
+                           else 
+                             timeslot =Timeslot.update(start_time: b, end_time: c, days: a, semester: params[:semester], location_id: params[d].to_i)
+                           end
                              EmployeeTimeSlot.create(employee_id: @employee.id, timeslot_id: Timeslot.find_by(start_time:b, end_time:c, days: a, location_id:params[d].to_i).id)
                   
                              CampusEmployee.create(employee_id: @employee.id, location_id: params[d].to_i)

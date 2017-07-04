@@ -1,37 +1,40 @@
 <h2>All the tutors</h2>
  <% @employees.where(approved:true).each_slice(3) do |employee_slice| %>
 <div class="row well">
-<p><% employee_slice.each do |e| %></p>
- <div class="col-md-4">
-<h3><a href="/employees/<%= e.id %>"><%= e.full_name %></a></h3>
-<p>
-<a href="/employees/<%= e.id %>/edit">Edit Profile</a> |
-<a href="/employees/<%= e.id %>/schedules/all/edit">Edit Schedule</a> |
-<a href="employees/<%= e.id %>/schedules/new">Submit upcoming schedule</a> |
-<a href="/employees/<%= e.id %>" data-method="delete" data-confirm="Blah blah" >Delete Tutor</a>
-</a>
-</p>
-<%= EmployeeSubject.where(employee_id: e.id).map{|course| course.courses_tutored}.join(" ") %>
-     <ul>
-    <% e.locations.each_slice(3) do |location_slice| %>
-    <div class="row well">
-    <% location_slice.each do |location|  %>
-   <div class="col-md-4">
-
-    <!-- # <h5><%# location.name if location.employees.find(e.id).timeslots.where(approved: false).any? %></h5> -->
-    <h5><%= location.name if e.timeslots.where(location_id: location.id, approved:false).any? %></h5>
-    <% #Location.find(location.id).employees.find(e.id).timeslots.where(approved: false).each do |time|%>
-    <%  e.timeslots.where(location_id: location.id, approved:false).each do |time|%>
-     <h5><%= time.days %></h5>
-     <p>
-      <%= time.start_time %>-<%= time.end_time %> 
-      </p>
-       <% end %>
-       </div>
-       <% end %>
-       </div>
-    <%end %>
-     </ul>
+  <p><% employee_slice.each do |e| %></p>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+       <div class="panel-heading">
+          <h3><a href="/employees/<%= e.id %>"><%= e.full_name %></a></h3>
+        </div>
+     <div class="panel-body">                
+        <p>
+        <a href="/employees/<%= e.id %>/edit">Edit Profile</a> |
+        <a href="/employees/<%= e.id %>/schedules/all/edit">Edit Schedule</a> |
+        <a href="/employees/<%= e.id %>/schedules/new">Submit upcoming schedule</a> |
+        <a href="/employees/<%= e.id %>" data-method="delete" data-confirm="Blah blah" >Delete Tutor</a>
+        </a>
+        </p>
+  <p> <%= EmployeeSubject.where(employee_id: e.id).map{|course| course.courses_tutored}.join(" ") %></p>
+      <!-- <ul> -->
+        <% e.locations.each_slice(2) do |location_slice| %>
+          <!-- <div class="row well"> -->
+          <% location_slice.each do |location|  %>
+            <div class="col-md-6 left ">
+                <h5><%= location.name if e.timeslots.where(location_id: location.id, approved:false).any? %></h5>
+                <%  e.timeslots.where(location_id: location.id, approved:false).each do |time|%>
+                <h5><%= time.days %></h5>
+                <p>
+                <%= time.start_time %>-<%= time.end_time %> 
+                </p>
+                 <% end %>
+             </div>
+            <% end %>
+             <!-- </div> -->
+        <%end %>
+      <!-- </ul> -->
+    </div>
+ </div>
 </div>
 <% end %>
 </div>
