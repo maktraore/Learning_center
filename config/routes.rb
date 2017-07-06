@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
 
   get "/surveys", to:'surveys#index'
+  # get "/index", to:'employees#index'
   post "/surveys", to: 'surveys#create'
+  get "/surveys/results", to: 'surveys#show'
 
   root  'employees#index', as: 'home'  
+  namespace :api do 
+    namespace :v1 do 
+      resources :employees
+    end
+  end
   resources :employees do
     resources :schedules
   end

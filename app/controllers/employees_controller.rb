@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+  # before_action :authenticate_admin!
   def index
     if params[:campus]
       @employees = Location.find_by(name:params[:campus]).employees
@@ -6,6 +7,15 @@ class EmployeesController < ApplicationController
       @employees = Subject.find_by(department:params[:department]).employees
     else
       @employees=Employee.all
+    end
+    respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = EmployeesSchedulesPdf.new
+        # pdf.text "just checking"
+        send_data pdf.render, filename:"Schedules_of_tutors.pdf",                                  disposition: "inline",
+                                                type: "application/pdf"
+      end
     end
   end
 
@@ -58,6 +68,7 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(full_name: params[:name], email: params[:email], password: params[:password], phone_number: params[:phone_number], bio: params[:bio], approved: params[:approved], admin: params[:admin])
            @employee.save
+      session[:employee_id] = @employee.id
     EmployeeSubject.create(employee_id: @employee.id, subject_id:  params[:department_1], courses_tutored: params[:courses_tutored_1])
         if !params[:courses_tutored_2].empty?
             EmployeeSubject.create(employee_id: @employee.id, subject_id:  params[:department_2], courses_tutored: params[:courses_tutored_2])
@@ -69,7 +80,6 @@ class EmployeesController < ApplicationController
  
       redirect_to "/employees" 
     
-      # session[:user_id] =employee.id
       # flash[:success] = "#{employee.name} has been sign up"
       # redirect_to "/login"
       # else

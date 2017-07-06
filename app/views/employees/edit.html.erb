@@ -7,7 +7,7 @@
 <p>Bio: <input type="textarea" name="bio" value="<%= @employee.bio %>"></p>
 <p>Courses Tutored: <input type="textarea" name="courses_tutored_1" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first.courses_tutored if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first%>">
 <select name="department_1">
-<option value>--select location--</option>
+<option value>--select department--</option>
               <% @subjects.each do |subject| %>
               <% if @emp_subjects_arr && @emp_subjects_arr.include?(subject.department)%>
                   <option selected value="<%= subject.id%>"><%= @emp_subjects_arr.first  %></option>
@@ -21,7 +21,7 @@
       <% end %>
 <p>Courses Tutored: <input type="textarea" name="courses_tutored_2" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second.courses_tutored if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second %>"> 
       <select name="department_2">
-             <option value>--select location--</option>
+             <option value>--select department--</option>
              <% @subjects.each do |subject| %>
               <% if @emp_subjects_arr && @emp_subjects_arr.second  && @emp_subjects_arr.include?(subject.department)%>
                   <option selected value="<%= subject.id%>"><%= @emp_subjects_arr.second  %></option>
@@ -36,8 +36,10 @@
           <!-- <a href="/employees/<%# e.id %>" data-method="delete" >delete</a> -->
 </p>
 <p>Image: <input type="text" name="image" value="<%= @employee.image %>"></p>
+<%# if current_user && current_user.admin %>    
 <p>Approved: <input type="text" name="approved" value="<%= @employee.approved %>"></p>
 <p>Admin: <input type="text" name="admin" value="<%= @employee.admin %>"></p>
+<%# end %>
 <p><input class="btn"  type="submit"></p>
 <% end %>
 </div>

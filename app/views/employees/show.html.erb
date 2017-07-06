@@ -1,15 +1,20 @@
 <h1>This is <%= @employee.full_name %>'s page</h1>
+<hr>
+<% if current_user && (current_user.admin || current_user.full_name==  @employee.full_name) %> 
+<div class="little_right"> 
 <a href="/employees/<%= @employee.id %>/edit">Edit Profile</a> |
 <a href="/employees/<%= @employee.id %>/schedules/all/edit">Edit Schedule</a> |
 <a href="/employees/<%= @employee.id %>/schedules/new">Submit upcoming schedule</a> |
 <a href="/newpassword">Update your password</a> 
-<div>Bio<textarea  rows="3" icols="4"></textarea></div>
-<%= form_tag "/employees/#{@employee.id}/bio", method: :patch do %>
-<p class="left"><a href="#">Edit bio</a> <a href="#">Submit</a></p>
-
+</div>    
 <% end %>
-
-<div class="row well">
+<hr>
+<h3 class="middle">About <%= @employee.full_name %></h3>
+<div>
+  <img  class="little_right" src="<%= @employee.image %>" > 
+  <hr>
+  </div>
+<div class="row well little_right">
 <% @employee.locations.each_slice(3) do |location_slice|  %>
 <div class="col-md-4">
 <% location_slice.each do |location| %>
