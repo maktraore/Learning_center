@@ -1,5 +1,6 @@
 <h2>All the tutors</h2>
-<%= link_to "printable schedules (pdf)", home_path(@employees, format: "pdf")  %>
+p <%= link_to "printable schedules (pdf)", home_path(@employees, format: "pdf")  %>
+Hi <%= current_user.full_name %>
  <% @employees.where(approved:true).each_slice(3) do |employee_slice| %>
 <div class="row well">
   <p><% employee_slice.each do |e| %></p>

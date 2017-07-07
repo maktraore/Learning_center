@@ -27,6 +27,10 @@ Rails.application.routes.draw do
   get "/logout", to: 'sessions#destroy'
   get "/newpassword", to: 'sessions#edit'
   post "/newpassword", to: 'sessions#update'
+  get "/photos", to: 'photos#new'
+  post "/photos", to: 'photos#create'
+  get "/photos", to: 'photos#edit'
+  patch "/photos", to: 'photos#update'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

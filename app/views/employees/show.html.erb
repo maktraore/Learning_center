@@ -9,11 +9,29 @@
 </div>    
 <% end %>
 <hr>
-<h3 class="middle">About <%= @employee.full_name %></h3>
+<div class="middle" >
+<h3 >About <%= @employee.full_name %></h3>
+<p><%= @employee.bio %></p>
+</div>
 <div>
-  <img  class="little_right" src="<%= @employee.image %>" > 
-  <hr>
+   <% if @current_user_photo %>
+      <%= image_tag(@current_user_photo.image.url, :class => "little_right size") %>
+    <% else %>
+  <img  class="little_right" src="https://placehold.it/300x300.png" > 
+<% end %>
   </div>
+  <% if current_user &&current_user.full_name==  @employee.full_name %> 
+  <div class="little_right">
+      <% if @current_user_photo %>
+        <%= form_tag "/photos", method: :patch do %>
+        <a href="/photos">Change profile picture</a>
+        <% end %>
+      <%else %>
+      <a href="/photos">Add profile picture</a>
+      <% end %>
+  <% end %>
+  </div>
+  <hr>
 <div class="row well little_right">
 <% @employee.locations.each_slice(3) do |location_slice|  %>
 <div class="col-md-4">
@@ -30,4 +48,4 @@
        <% end %>
        </div>
     <%end %>
-
+   

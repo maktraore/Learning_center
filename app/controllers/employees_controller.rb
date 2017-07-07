@@ -20,6 +20,7 @@ class EmployeesController < ApplicationController
   end
 
   def show
+    @current_user_photo = Photo.where(employee_id: current_user.id).last
     @locations = Location.all
     @employee = Employee.find_by(id:params[:id])
   end
