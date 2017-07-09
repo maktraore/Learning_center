@@ -1,5 +1,5 @@
 <h1>Login</h1>
-<%= form_tag "/login", method: :post do %>
+<%= form_tag @url, method: :post do %>
   <div class="right">
     Email: <input type="email" name="email">
   </div>
@@ -8,5 +8,6 @@
   </div>
   <input class="right" type="submit" value="Log In">
 <% end %>
+<% if !request.path.include?("students") %>
 <p>Are you a tutor and don't have an account? <a href="/employees/new">Create a tutor account</a></p>
-
+<% end %>

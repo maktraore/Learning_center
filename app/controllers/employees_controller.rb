@@ -29,10 +29,9 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    current_user_id = current_user.id if current_user
-    @current_user_photo = Photo.where(employee_id: current_user_id).last
-    @locations = Location.all
     @employee = Employee.find_by(id:params[:id])
+    @current_user_photo = Photo.where(employee_id: @employee.id).last
+    @locations = Location.all
   end
 
   def new
@@ -62,6 +61,7 @@ class EmployeesController < ApplicationController
     @employee.bio = params[:bio]
     @employee.email = params[:email]
     @employee.save
+    binding.pry
     if params[:courses_tutored_2]
       employee_course_2 = EmployeeSubject.find_by(subject_id: params[:department_2], employee_id: params[:id])
       if employee_course_2
@@ -70,6 +70,7 @@ class EmployeesController < ApplicationController
          EmployeeSubject.create(employee_id: params[:id], subject_id:params[:department_2], courses_tutored: params[:courses_tutored_2])
       end
     end
+    binding.pry
     flash[:success] = "The Tutor information has been updated"
     redirect_to "/"
   end

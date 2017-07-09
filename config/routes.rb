@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/students/signup", to: "users#new"
   post "/users", to: "users#create"
   get "/students/login", to: "sessions#new"
-  post "/login", to: "sessions#create"
+  post "/students/login", to: "sessions#create"
   get "/students/logout", to: "sessions#destroy"
 
   get "/surveys", to:'surveys#index'

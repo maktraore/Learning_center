@@ -3,12 +3,15 @@
   <head>
     <title>LearningCenter</title>
     <%= csrf_meta_tags %>
-
+  <%= Gon::Base.render_data %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+  <% flash.each do |name, msg| %>
+    <p><%= msg %></p>
+  <% end %>
   <%= render "layouts/nav" %>
     <%= yield %>
   </body>

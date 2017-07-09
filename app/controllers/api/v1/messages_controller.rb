@@ -12,7 +12,6 @@ class Api::V1::MessagesController < ApplicationController
     )
     ActionCable.server.broadcast "activity_channel", {
       id: @message.id,
-      name: @message.user.name,
       body: @message.body,
       chatroom_id: @message.chatroom_id,
       created_at: @message.created_at

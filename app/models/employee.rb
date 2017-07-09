@@ -8,6 +8,6 @@ class Employee < ApplicationRecord
   has_many :subjects, through: :employee_subjects  
 
   validates :email, uniqueness:true
-  validates :bio,  length: { maximum: 30}
+  validates :bio,  length: { maximum: 2000}
   
 end

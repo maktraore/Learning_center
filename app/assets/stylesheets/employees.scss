@@ -2,7 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .middle {
-  margin-left: 400px;
+  // margin-left: 400px;
+  padding-left: 25px;
 }
 .little_right {
   margin-left: 30px;
@@ -10,10 +11,13 @@
 .far_right {
   float: right;
 }
-.center {
-    margin: 5px 0;
-    width: calc(100% - 460px);
-}
-.middletext {
-  vertical-align: middle;
-}
+// .center {
+//     margin: 5px 0;
+//     width: calc(100% - 460px);
+// }
+// .middletext {
+//   vertical-align: middle;
+// }
+// .test-padding {
+//   padding-top:  -165px;
+// }
