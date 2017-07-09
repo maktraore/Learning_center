@@ -11,10 +11,10 @@
 <hr>
 <div class="middle" >
 <h3 >About <%= @employee.full_name %></h3>
-<p><%= @employee.bio %></p>
+<p class="center"><%= @employee.bio %></p>
 </div>
 <div>
-   <% if @current_user_photo %>
+   <% if @current_user_photo && @current_user_photo == Photo.where(employee_id: params[:id]).last %>
       <%= image_tag(@current_user_photo.image.url, :class => "little_right size") %>
     <% else %>
   <img  class="little_right" src="https://placehold.it/300x300.png" > 

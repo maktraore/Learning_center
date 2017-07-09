@@ -10,3 +10,10 @@
 .far_right {
   float: right;
 }
+.center {
+    margin: 5px 0;
+    width: calc(100% - 460px);
+}
+.middletext {
+  vertical-align: middle;
+}

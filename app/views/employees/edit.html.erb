@@ -4,7 +4,6 @@
 <p>Full Name: <input type="text" name="full_name" value="<%= @employee.full_name %>"></p>
 <p>Email: <input type="email" name="email" value="<%= @employee.email %>"></p>
 <p>Phone number: <input type="text" name="phone_number" value="<%= @employee.phone_number %>"></p>
-<p>Bio: <input type="textarea" name="bio" value="<%= @employee.bio %>"></p>
 <p>Courses Tutored: <input type="textarea" name="courses_tutored_1" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first.courses_tutored if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first%>">
 <select name="department_1">
 <option value>--select department--</option>
@@ -35,7 +34,7 @@
           <% end %>
           <!-- <a href="/employees/<%# e.id %>" data-method="delete" >delete</a> -->
 </p>
-<p>Image: <input type="text" name="image" value="<%= @employee.image %>"></p>
+<p>Bio: <textarea class="middletext" name="bio" cols="40" rows="5" ><%= @employee.bio %></textarea></p>
 <%# if current_user && current_user.admin %>    
 <p>Approved: <input type="text" name="approved" value="<%= @employee.approved %>"></p>
 <p>Admin: <input type="text" name="admin" value="<%= @employee.admin %>"></p>

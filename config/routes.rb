@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
 
+  namespace :api do
+    namespace :v1 do
+      resources :messages, only: [:index, :create]
+    end
+  end
+  get "/messages", to: "messages#index"
+
+  get "/students/signup", to: "users#new"
+  post "/users", to: "users#create"
+  get "/students/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  get "/students/logout", to: "sessions#destroy"
+
   get "/surveys", to:'surveys#index'
   # get "/index", to:'employees#index'
   post "/surveys", to: 'surveys#create'
@@ -14,6 +27,8 @@ Rails.application.routes.draw do
   resources :employees do
     resources :schedules
   end
+  resources :messages, only: [:index, :create]
+  resources :chatrooms, only: [:show, :create]
   resources :locations
   resources :subjects
   resources :time_slots
@@ -31,6 +46,8 @@ Rails.application.routes.draw do
   post "/photos", to: 'photos#create'
   get "/photos", to: 'photos#edit'
   patch "/photos", to: 'photos#update'
+
+  mount ActionCable.server => "/cable"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
