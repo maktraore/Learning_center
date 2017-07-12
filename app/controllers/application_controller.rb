@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     redirect_to "/login" unless current_user
   end
   def authenticate_student
-    redirect_to "/login" unless current_student
+    redirect_to "/students/login" unless current_student
   end
 
  def authenticate_admin!

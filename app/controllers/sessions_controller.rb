@@ -13,10 +13,15 @@ class SessionsController < ApplicationController
     def create
       if request.path.include?("students")
          user = User.find_by(email: params[:email])
-        if user && user.authenticate(params[:password])
+         # employee = Employee.find_by(email: params[:email])
+        if user && user.authenticate(params[:password]) 
           session[:user_id] = user.id
           flash[:success] = 'Successfully logged in!'
           redirect_to '/messages' 
+        # elsif employee && employee.authenticate(params[:password])
+          # session[:employee_id] = employee.id
+          # flash[:success] = 'Successfully logged in!'
+          # redirect_to '/messages' 
         else
           flash[:warning] = 'Invalid email or password!'
           redirect_to 'students/login'

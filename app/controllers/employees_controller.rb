@@ -11,8 +11,25 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do 
-        pdf = EmployeesSchedulesPdf.new
-        # pdf.text "just checking"
+        pdf = EmployeesSchedulesPdf.new(@employees)
+        # pdf = Prawn::Document.new
+        # pdf.text "Schedules of the tutors", size: 30
+        # [["Name", "campus", "Dates"]]
+        # @employees.table.map do |item|
+        #   [item.full_name, item.days]
+        # end
+        # @employees.each do |employee|
+        #   pdf.text employee.full_name, size:15
+        #   employee.locations.each do |location|
+        #         pdf.text location.name 
+        #         employee.timeslots.each do |time|
+        #            pdf.text time.days
+        #            pdf.text time.start_time
+        #            pdf.text time.end_time
+
+        #         end
+        #   end
+        # end    
         send_data pdf.render, filename:"Schedules_of_tutors.pdf", disposition: "inline",
                                                 type: "application/pdf"
       end
@@ -61,7 +78,7 @@ class EmployeesController < ApplicationController
     @employee.bio = params[:bio]
     @employee.email = params[:email]
     @employee.save
-    binding.pry
+
     if params[:courses_tutored_2]
       employee_course_2 = EmployeeSubject.find_by(subject_id: params[:department_2], employee_id: params[:id])
       if employee_course_2
@@ -70,7 +87,7 @@ class EmployeesController < ApplicationController
          EmployeeSubject.create(employee_id: params[:id], subject_id:params[:department_2], courses_tutored: params[:courses_tutored_2])
       end
     end
-    binding.pry
+
     flash[:success] = "The Tutor information has been updated"
     redirect_to "/"
   end

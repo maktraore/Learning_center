@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   resources :employees do
     resources :schedules
   end
-  resources :messages, only: [:index, :create]
+  resources :messages, only: [:index, :create, :show]
   resources :chatrooms, only: [:show, :create]
   resources :locations
   resources :subjects

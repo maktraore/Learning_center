@@ -1,11 +1,11 @@
 <h3>Welcome to the chatroom</h3>
 <p>Post your question someone will respond as soon as possible</p>
 <div id="app">
-  <ul>
-    <li v-for="message in messages">{{message}}</li>
-  </ul>
+
+   <div class="little_right" v-for="message in messages"><strong>{{message.name}}: </strong> {{message.body}}</div>
+
   <div>
-     <input v-model='newMessageBody'>
+     Message: <input v-model='newMessageBody'>
      <button @click='addMessage()'>Send Message</button>
   </div>
 </div>
