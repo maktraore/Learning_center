@@ -14,7 +14,15 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find_by(id: session[:user_id])
      end
   end
+  def authenticate_all
+      redirect_to "/login" unless current_user || current_student
 
+    # if current_user  
+    #   redirect_to "/messages" 
+    # else
+    #    redirect_to "/login" 
+    # end
+  end
   def authenticate_user
     redirect_to "/login" unless current_user
   end

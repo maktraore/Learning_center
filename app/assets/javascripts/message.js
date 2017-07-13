@@ -20,10 +20,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
       addMessage: function(){
         var params = {
            body: this.newMessageBody,
-           user_id: gon.user_id
+           user_id: gon.user_id,
+           employee_id: gon.employee_id
         };
          $.post('/api/v1/messages', params, function(data) {
-          console.log(data)
+          console.log(data);
           this.messages.push(data).body;
       }.bind(this));
       }

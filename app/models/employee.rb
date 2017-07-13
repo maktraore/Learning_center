@@ -6,6 +6,7 @@ class Employee < ApplicationRecord
   has_many :timeslots, through: :employee_time_slots
   has_many :employee_subjects
   has_many :subjects, through: :employee_subjects  
+  has_many :messages
 
   validates :email, uniqueness:true
   validates :bio,  length: { maximum: 2000}

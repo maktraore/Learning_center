@@ -5,17 +5,27 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   def show
-    @message = Message.find_by(id: params[:id])
+    message = Message.find_by(id: params[:id])
+    if message.user_id
+      @name = message.user.name
+    else
+      @name = message.employee.full_name
+    end
     
   end
-
 
   def create
     @message = Message.create(
       body: params[:body],
       user_id: params[:user_id],
+      employee_id: params[:employee_id],
       chatroom_id: params[:chatroom_id]
     )
+      if @message.user_id
+      @name = @message.user.name
+    else
+      @name = @message.employee.full_name
+    end
     ActionCable.server.broadcast "activity_channel", {
       id: @message.id,
       body: @message.body,
