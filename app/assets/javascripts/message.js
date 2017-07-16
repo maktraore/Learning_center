@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     el: '#app',
     data: {
       messages: [],
-      newMessageBody:  "test"
+      newMessageBody:  ""
     },
     
        mounted: function() {

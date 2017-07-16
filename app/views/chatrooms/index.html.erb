@@ -1,2 +1,21 @@
-<h1>Chatrooms#index</h1>
-<p>Find me in app/views/chatrooms/index.html.erb</p>
+`<h3>Welcome to the chatroom</h3>
+<!-- <div class="container"> -->
+<p>Post your question someone will respond as soon as possible</p>
+<div id="app">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-lg-6">
+            <div class="panel-title">
+               <div class="little_right " v-for="chat in chats"><strong>{{chat.name}}: </strong>
+               <span class="text-primary"> {{chat.body}}</span>
+               </div>
+
+             <div>
+     chat: <textarea class="middletext panel-footer " v-model='newchatBody'></textarea>
+     <button @click='addchat()'>Send chat</button>
+             </div>
+          </div>
+      </div>
+    </div>
+  </div>
+ </div>

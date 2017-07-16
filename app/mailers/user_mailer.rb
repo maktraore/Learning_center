@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'notifications@learningcenters.com'
+  default from: 'newamericanrealty.seyba@gmail.com'#'notifications@learningcenters.com'
   def welcome_email(user)
     @employee = user 
     @url = 'http://localhost:3000/employees/new'

@@ -6,12 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# 50.times do 
+# 20.times do 
 #   Employee.create(
 #     full_name: Faker::Name.name,
 #     email:  Faker::Internet.email,
 #     phone_number:  Faker::PhoneNumber.cell_phone,
-#     bio: Faker::Hipster.paragraphs
+#     bio: Faker::Hipster.paragraphs,
+#     approved: true
 #     )
 # end
 
@@ -25,7 +26,7 @@
 # emp = (1..50).to_a
 # subject = (1..15).to_a
 
-# 10.times do 
+# 20.times do 
 #   EmployeeSubject.create(
 #         employee_id: Employee.all.sample.id,
 #         subject_id: Subject.all.sample.id
@@ -33,7 +34,7 @@
 # end
 # Timeslot.create(start_time:"12:00pm",end_time:"5:00pm",semester:"Summer",days:"Mondays", location_id: Location.all.sample.id)
 # Location.create(name:"Online", address:"Online",phone_number:"1234567890")
-#EmployeeSubject.all.where("id> ?", 10).destroy_all
+# # EmployeeSubject.all.where("id> ?", 10).destroy_all
 # Employee.all.each do |e|
 #   CampusEmployee.create(employee_id: e.id, location_id: Location.pluck(:id).sample)
 #   CampusEmployee.create(employee_id: e.id, location_id: Location.pluck(:id).sample)
@@ -42,16 +43,16 @@
 #   EmployeeSubject.create(employee_id: e.id, subject_id: Subject.pluck(:id).sample, courses_tutored: "Math116 Math105")
 #   EmployeeSubject.create(employee_id: e.id, subject_id: Subject.pluck(:id).sample)
 # end
-# CampusEmployee.destroy_all
+# # CampusEmployee.destroy_all
 # Employee.all.each do |e|
 #   timeslots = Timeslot.pluck(:id).shuffle
 #   EmployeeTimeSlot.create(employee_id: e.id, timeslot_id: timeslots.pop)
 #   EmployeeTimeSlot.create(employee_id: e.id, timeslot_id: timeslots.pop)
 # end
 # Subject.all.each do |e|
-  # CampusSubject.create!(location_id: Location.pluck(:id).sample, subject_id: e.id)
-  # CampusSubject.create!(location_id: Location.pluck(:id).sample, subject_id: e.id)
- # end
+#   CampusSubject.create!(location_id: Location.pluck(:id).sample, subject_id: e.id)
+#   CampusSubject.create!(location_id: Location.pluck(:id).sample, subject_id: e.id)
+#  end
 #  5.times do 
 #   Subject.create(department: Math)
 # end

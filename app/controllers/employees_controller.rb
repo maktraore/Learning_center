@@ -12,24 +12,7 @@ class EmployeesController < ApplicationController
       format.html
       format.pdf do 
         pdf = EmployeesSchedulesPdf.new(@employees)
-        # pdf = Prawn::Document.new
-        # pdf.text "Schedules of the tutors", size: 30
-        # [["Name", "campus", "Dates"]]
-        # @employees.table.map do |item|
-        #   [item.full_name, item.days]
-        # end
-        # @employees.each do |employee|
-        #   pdf.text employee.full_name, size:15
-        #   employee.locations.each do |location|
-        #         pdf.text location.name 
-        #         employee.timeslots.each do |time|
-        #            pdf.text time.days
-        #            pdf.text time.start_time
-        #            pdf.text time.end_time
-
-        #         end
-        #   end
-        # end    
+        
         send_data pdf.render, filename:"Schedules_of_tutors.pdf", disposition: "inline",
                                                 type: "application/pdf"
       end

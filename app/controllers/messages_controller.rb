@@ -13,4 +13,10 @@ class MessagesController < ApplicationController
       gon.employee_id = current_user.id
     end
   end
+  def new
+  end
+  def send_email
+   flash[:sucess]="Message sent" if Message.create(body: params[:body], email: params[:email])
+redirect_to "/employees"
+  end
 end

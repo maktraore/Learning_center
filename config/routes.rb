@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     end
   end
   get "/messages", to: "messages#index"
+  get "/new", to: 'messages#new'
+  post "/contact", to: 'messages#send_email'
 
   get "/students/signup", to: "users#new"
   post "/users", to: "users#create"
