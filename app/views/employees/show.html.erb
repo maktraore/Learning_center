@@ -9,7 +9,7 @@
 </div>    
 <% end %>
 <% #if current_student %>
-<a class="little_right" href="#">Chat with the tutor</a>
+<a class="little_right" href="/chatrooms/<%= @employee.chatroom.id %>">Chat with the tutor</a>
 <% #end %>
 <hr>
 <div class="container">

@@ -5,9 +5,9 @@ Rails.application.routes.draw do
       resources :messages, only: [:index, :create]
     end
   end
-  get "/messages", to: "messages#index"
-  get "/new", to: 'messages#new'
-  post "/contact", to: 'messages#send_email'
+  # get "/messages", to: "messages#index"
+  get "/new_email", to: 'messages#new_email'
+  post "/new_email", to: 'messages#create_email'
 
   get "/students/signup", to: "users#new"
   post "/users", to: "users#create"
