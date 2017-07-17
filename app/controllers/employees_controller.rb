@@ -28,6 +28,18 @@ class EmployeesController < ApplicationController
     # end
   end
 
+  def manhattan_schedule_pdf
+      respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = ManhattanSchedulePdf.new(@employees)
+        
+        send_data pdf.render, filename:"Manhattan.pdf", disposition: "inline",
+                                                type: "application/pdf"
+      end
+    end
+  end
+
   def show
     @employee = Employee.find_by(id:params[:id])
     @current_user_photo = Photo.where(employee_id: @employee.id).last

@@ -1,7 +1,7 @@
 <h2 class="little_right">All the tutors</h2>
 <p class="little_right">
 <%= link_to "printable schedules (pdf)", home_path(@employees, format: "pdf")  %>
-<%= link_to "Manhattan schedules (pdf)", home_path(@employees, format: "pdf")  %>
+<%= link_to "Manhattan schedules (pdf)", manhattan_path(@employees, format: "pdf")  %>
 <% if current_user %>
 Hi <%= current_user.full_name %> 
 <% end %>
