@@ -9,7 +9,11 @@
 </div>    
 <% end %>
 <% #if current_student %>
-<a class="little_right" href="/chatrooms/<%= @employee.chatroom.id %>">Chat with the tutor</a>
+<%= form_tag "/chatrooms", method: :post do %>
+  <%= hidden_field_tag(:recipient_id, @employee.id) %>
+             <%= submit_tag 'Chat With User', class: 'btn btn-primary sm-scroll margin-top-10 wow bounceIn', 'data-wow-delay': '1.0s'%>
+<% end %>
+
 <% #end %>
 <hr>
 <div class="container">

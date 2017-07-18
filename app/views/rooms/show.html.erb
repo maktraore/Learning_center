@@ -17,7 +17,7 @@
       </ul>
     </div>
     <div class="listings_direct-messages">
-      <h2 class="listings_header">List of usernames for active chats this user has</h2>
+      <h2 class="listings_header">List of names this user has talked to</h2>
       <ul class="channel_list">
         <li class="channel">
         </li>
@@ -33,6 +33,7 @@
 </div>
 <div class="footer">
   <div class="user-menu">
+  <% if current_student %>
     <span class="user-menu_username"><%= current_student.name %></span>
     <span class="connection_status">online</span>
    
@@ -40,3 +41,4 @@
 </div>
 <input type="hidden" value="<%= params[:id] %>" id="conversation_id">
 <input type="hidden" value="<%= current_student.id %>" id="user_id">
+    <% end %>

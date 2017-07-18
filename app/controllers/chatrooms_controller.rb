@@ -50,5 +50,5 @@ class ChatroomsController < ApplicationController
   #       end
   #     end
   #   redirect_to "/chatrooms/#{@chatroom.id}"
-  # end
+  end
 end

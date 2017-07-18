@@ -7,7 +7,8 @@ class Employee < ApplicationRecord
   has_many :employee_subjects
   has_many :subjects, through: :employee_subjects  
   has_many :messages
-  has_one :chatroom
+  has_many :chatrooms
+  # has_one :chatroom
 
   validates :email, uniqueness:true
   validates :bio,  length: { maximum: 2000}

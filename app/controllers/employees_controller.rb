@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
   # before_action :authenticate_admin!
   def index
+    @students = User.all
     if params[:campus]
       @employees = Location.find_by(name:params[:campus]).employees
     elsif params[:department]
@@ -17,15 +18,6 @@ class EmployeesController < ApplicationController
                                                 type: "application/pdf"
       end
     end
-    # respond_to do |format|
-    #   format.html
-    #   format.pdf do 
-    #     pdf = ManhattanSchedulePdf.new
-    #     # pdf.text "just checking"
-    #     send_data pdf.render, filename:"Manhattan_schedule.pdf", disposition: "inline",
-    #                                             type: "application/pdf"
-    #   end
-    # end
   end
 
   def manhattan_schedule_pdf
@@ -37,13 +29,14 @@ class EmployeesController < ApplicationController
         send_data pdf.render, filename:"Manhattan.pdf", disposition: "inline",
                                                 type: "application/pdf"
       end
-    end
+   end
   end
 
   def show
     @employee = Employee.find_by(id:params[:id])
     @current_user_photo = Photo.where(employee_id: @employee.id).last
     @locations = Location.all
+
   end
 
   def new
