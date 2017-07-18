@@ -1,2 +1,15 @@
-<h1>Chatrooms#show</h1>
-<p>Find me in app/views/chatrooms/show.html.erb</p>
+<!-- <h1><%# @chatroom.title %></h1> -->
+<% if @chatroom.messages.any? %>
+  <div id="messages-<%= @chatroom.id %>">
+    <%= render partial: 'messages/message', collection: @chatroom.messages%>
+  </div>
+<% else %>
+  <div class="hidden" id="messages-<%= @chatroom.id %>">
+  </div>
+<% end %>
+<%= form_tag room_messages_path(@chatroom), remote: true, method: :post do %>
+  <div>
+    <%= text_area_tag :content, "", class: "form-control", data: { textarea: "message" }%>
+  </div>
+  <div><input type="submit" value="Submit message"></div>
+  <% end %>

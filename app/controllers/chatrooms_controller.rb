@@ -15,33 +15,40 @@ class ChatroomsController < ApplicationController
   end
 
   def create
-    if current_student
-      chatroom = Chatroom.find_by(
-        user_id: current_student.id,
-        employee_id: params[:employee_id]
-        )
+    conversation = Chatroom.find_by(sender_id: current_student.id, recipient: params[:recipient_id])
+    if conversation
+      @conversation = conversation
     else
-      chatroom = Chatroom.find_by(
-        user_id: params[:user_id],
-        employee_id: current_user.id
-        )
-      end
+      @conversation = Chatroom.create(sender_id: current_student.id, recipient_id: params[:recipient_id])
+    end
+    redirect_to "/rooms/#{@conversation.id}"
+  #   if current_student
+  #     chatroom = Chatroom.find_by(
+  #       user_id: current_student.id,
+  #       employee_id: params[:employee_id]
+  #       )
+  #   else
+  #     chatroom = Chatroom.find_by(
+  #       user_id: params[:user_id],
+  #       employee_id: current_user.id
+  #       )
+  #     end
 
-      if chatroom
-        @chatroom = chatroom
-      else
-        if current_student
-          Chatroom.create(
-          user_id: current_student.id,
-          employee_id: params[:employee_id]
-          )
-        else
-          chatroom = Chatroom.create(
-            user_id: params[:user_id],
-            employee_id: current_user.id
-            )
-        end
-      end
-    redirect_to "/chatrooms/#{@chatroom.id}"
-  end
+  #     if chatroom
+  #       @chatroom = chatroom
+  #     else
+  #       if current_student
+  #         Chatroom.create(
+  #         user_id: current_student.id,
+  #         employee_id: params[:employee_id]
+  #         )
+  #       else
+  #         chatroom = Chatroom.create(
+  #           user_id: params[:user_id],
+  #           employee_id: current_user.id
+  #           )
+  #       end
+  #     end
+  #   redirect_to "/chatrooms/#{@chatroom.id}"
+  # end
 end

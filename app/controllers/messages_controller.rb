@@ -8,10 +8,12 @@ class MessagesController < ApplicationController
       )
     if @message.save
       ActionCable.server.broadcast "room_channel", 
+      # ActionCable.server.broadcast "messages", 
       content: @message.body, 
+      room_id: message.room_id,
       username: @message.user.name
+      head :ok
     end
-    render 'messages#index'
 
   end
 

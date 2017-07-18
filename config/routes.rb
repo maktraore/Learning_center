@@ -30,7 +30,9 @@ Rails.application.routes.draw do
   resources :employees do
     resources :schedules
   end
+  resources :rooms, except: [:edit, :update, :destroy] 
   resources :messages, only: [:index, :create, :show]
+
   resources :chatrooms, only: [:show, :create]
   resources :locations
   resources :subjects

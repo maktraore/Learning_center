@@ -1,10 +1,15 @@
 class RoomChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "room_channel"
+    stream_from "room_channel#{params[:chatroom_id]}"
+    # stream_from "messages"
   end
 
   def speak(data)
-      Message.create content: data['message'], user: current_user, chatroom_id: data['chatroom_id']
+    puts "data"
+    puts "this is getting hit"
+      @message = Message.create body: data['message'], user_id: data['user_id'], chatroom_id: data['conversation_id']
+      puts @message
+      puts "$$$$$$$$$$$"
   end
 
   def unsubscribed

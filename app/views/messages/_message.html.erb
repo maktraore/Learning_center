@@ -1,1 +1,13 @@
-<p><%= message.user %>: <%= message.body %></p>
+<div class=“message”>
+
+ <a href=“” class=“message_username”><%= message.user.name %></a>
+ <span class=“message_timestamp”>
+   <%= message.created_at %>
+ </span>
+ <span class=“message_timestamp”>
+ </span>
+ <span class=“message_star”></span>
+ <span class=“message_content”>
+   <h4><%= message.body%></h4>
+ </span>
+</div>

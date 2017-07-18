@@ -1,0 +1,42 @@
+<link href="http://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet" type="text/css"/>
+<div class="header">
+  <div class="team-menu"> Chat</div>
+  <div class="channel-menu">
+    <span class="channel-menu_name"><span class="channel-menu_prefix"></span></span>
+  </div>
+</div>
+<div class="main">
+  <div class="listings">
+    <div class="listings_channels">
+      <h2 class="listings_header"></h2>
+      <ul class="channel_list">
+        <li class="channel active">
+        </li>
+        <li class="channel">
+        </li>
+      </ul>
+    </div>
+    <div class="listings_direct-messages">
+      <h2 class="listings_header">List of usernames for active chats this user has</h2>
+      <ul class="channel_list">
+        <li class="channel">
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="message-history" id="messages">
+    <%= render @messages %>
+  </div>
+  <div style="position: relative; width: 100%; height: 2em; bottom: 0; left: 225px;">
+    <input type="text"  id="message_input" class="input-box" placeholder="Type your message here and press enter to send"/>
+  </div>
+</div>
+<div class="footer">
+  <div class="user-menu">
+    <span class="user-menu_username"><%= current_student.name %></span>
+    <span class="connection_status">online</span>
+   
+  </div>
+</div>
+<input type="hidden" value="<%= params[:id] %>" id="conversation_id">
+<input type="hidden" value="<%= current_student.id %>" id="user_id">
