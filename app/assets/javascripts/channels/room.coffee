@@ -10,5 +10,5 @@ App.room = App.cable.subscriptions.create "RoomChannel",
       $messages = $('#messages')
       $messages.append data
       $messages.scrollTop($messages[0].scrollHeight)
-     speak: (message, conversation_id, user_id)->
-      @perform 'speak', message: message, conversation_id: conversation_id, user_id: user_id
+     speak: (message, conversation_id, user_id, employee_id)->
+      @perform 'speak', message: message, conversation_id: conversation_id, user_id: user_id, employee_id: employee_id

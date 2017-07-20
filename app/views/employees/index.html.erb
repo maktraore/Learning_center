@@ -26,15 +26,6 @@ Hi <%= current_user.full_name %>
         <a href="/employees/<%= e.id %>" data-method="delete" data-confirm="Blah blah" >Delete Tutor</a>
         </a>
         </p>
-        <% @students.each do |student|  %>
-          <div>
-            <%= student.name %>
-            <%= form_tag "/chatrooms", method: :post do %>
-              <%= hidden_field_tag(:recipient_id, student.id) %>
-              <%= submit_tag 'Chat With User', class: 'btn btn-primary sm-scroll margin-top-10 wow bounceIn', 'data-wow-delay': '1.0s'%>
-             <% end %>
-          </div>
-        <% end %>
         <%# end %>
   <h5> <%= EmployeeSubject.where(employee_id: e.id).map{|course| course.courses_tutored}.join(" ") %></h5>
       <!-- <ul> -->

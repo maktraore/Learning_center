@@ -5,7 +5,8 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    @message = Message.create body: data['message'], user_id: data['user_id'], chatroom_id: data['conversation_id']
+    @message = Message.create body: data['message'], user_id: data['user_id'], employee_id: data['employee_id'], chatroom_id: data['conversation_id']
+    # @message = Message.create body: data['message'], user_id: data['user_id'], employee_id: data['employee_id'], chatroom_id: data['conversation_id']
   end
 
   def unsubscribed

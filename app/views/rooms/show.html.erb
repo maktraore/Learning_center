@@ -36,9 +36,14 @@
   <% if current_student %>
     <span class="user-menu_username"><%= current_student.name %></span>
     <span class="connection_status">online</span>
+    <input type="hidden" value="<%= params[:id] %>" id="conversation_id">
+<input type="hidden" value="<%= current_student.id %>" id="user_id">
+    <% elsif current_user %>
+    <span class="user-menu_username"><%= current_user.full_name %></span>
+    <span class="connection_status">online</span>
    
+    <input type="hidden" value="<%= params[:id] %>" id="conversation_id">
+    <input type="hidden" value="<%= current_user.id %>" id="employee_id">
+    <% end %>
   </div>
 </div>
-<input type="hidden" value="<%= params[:id] %>" id="conversation_id">
-<input type="hidden" value="<%= current_student.id %>" id="user_id">
-    <% end %>

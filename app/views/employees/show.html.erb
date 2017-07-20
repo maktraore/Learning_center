@@ -10,7 +10,7 @@
 <% end %>
 <% #if current_student %>
 <%= form_tag "/chatrooms", method: :post do %>
-  <%= hidden_field_tag(:recipient_id, @employee.id) %>
+  <%= hidden_field_tag(:employee_id, @employee.id) %>
              <%= submit_tag 'Chat With User', class: 'btn btn-primary sm-scroll margin-top-10 wow bounceIn', 'data-wow-delay': '1.0s'%>
 <% end %>
 
@@ -53,7 +53,6 @@
 <div class="col-md-4">
 <% location_slice.each do |location| %>
     <h5><%= location.name if @employee.timeslots.where(location_id: location.id, approved:false).any? %></h5>
-    <% #Location.find(location.id).employees.find(e.id).timeslots.where(approved: false).each do |time|%>
     <%  @employee.timeslots.where(location_id: location.id, approved:false).each do |time|%>
      <h5><%= time.days %></h5>
      <p>
@@ -64,4 +63,16 @@
        <% end %>
        </div>
     <%end %>
+  <% if current_user &&current_user.full_name==  @employee.full_name %>     
+    <div class="little_right">
+      <h4>List of communications</h4>
+      <% @students.each_slice(2) do |chatroom_slice|  %>
+          <div class="col-md-2">
+          <% chatroom_slice.each do |chatroom| %>
+            <%= link_to "Chat with #{chatroom.user.name }", room_path(chatroom), class: 'btn btn-primary sm-scroll margin-top-10 wow bounceIn', 'data-wow-delay': '1.0s' %>
+             <% end %>
+          </div>
+        <% end %>
+    </div>
+ <% end %>
    

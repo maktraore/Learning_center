@@ -1,7 +1,6 @@
 class EmployeesController < ApplicationController
   # before_action :authenticate_admin!
   def index
-    @students = User.all
     if params[:campus]
       @employees = Location.find_by(name:params[:campus]).employees
     elsif params[:department]
@@ -33,10 +32,11 @@ class EmployeesController < ApplicationController
   end
 
   def show
+    @students = current_user.chatrooms
     @employee = Employee.find_by(id:params[:id])
     @current_user_photo = Photo.where(employee_id: @employee.id).last
     @locations = Location.all
-
+    # @rooms = 
   end
 
   def new

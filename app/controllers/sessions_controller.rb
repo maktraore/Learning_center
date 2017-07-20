@@ -14,7 +14,10 @@ class SessionsController < ApplicationController
       if request.path.include?("students")
          user = User.find_by(email: params[:email])
          # employee = Employee.find_by(email: params[:email])
-        if user && user.authenticate(params[:password]) 
+         if current_user
+          flash[:success] = "You're already logged in as an employee"
+          # redirect_to 
+        elsif user && user.authenticate(params[:password]) 
           session[:user_id] = user.id
           flash[:success] = 'Successfully logged in!'
           redirect_to '/messages' 
@@ -28,7 +31,9 @@ class SessionsController < ApplicationController
         end
       else
         employee = Employee.find_by(email: params[:email])
-        if employee && employee.authenticate(params[:password])
+        if current_student
+          flash[:success] = "You're already logged in as a student"
+        elsif employee && employee.authenticate(params[:password])
           session[:employee_id] = employee.id 
           flash[:success] = "#{employee.full_name} has been logged in successfully."
           redirect_to "/employees"
