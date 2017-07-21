@@ -27,11 +27,12 @@
   <div class="message-history" id="messages">
     <%= render @messages %>
   </div>
-  <div style="position: relative; width: 100%; height: 2em; bottom: 0; left: 225px;">
-    <input type="text"  id="message_input" class="input-box" placeholder="Type your message here and press enter to send"/>
-  </div>
+  
 </div>
 <div class="footer">
+<div style="position: relative; width: 100%; height: 2em; bottom: 0; left: 225px;">
+    <input type="text"  id="message_input" class="input-box" placeholder="Type your message here and press enter to send"/>
+  </div>
   <div class="user-menu">
   <% if current_student %>
     <span class="user-menu_username"><%= current_student.name %></span>
