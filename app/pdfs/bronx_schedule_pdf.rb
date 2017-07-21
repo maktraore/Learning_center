@@ -1,4 +1,4 @@
-class ManhattanSchedulePdf < Prawn::Document
+class BronxSchedulePdf < Prawn::Document
 
     def initialize(employees)
       super()
@@ -23,9 +23,9 @@ class ManhattanSchedulePdf < Prawn::Document
     def schedules_all
       emp = []
       employee_subjects = []
-      Employee.all.joins(:locations).where('locations.name = ?', "Manhattan").where(approved: true).each {|employee| 
-        emp<<  [employee.full_name , employee.timeslots.where(approved: false).where(location_id:1).map{|timeslot| [timeslot.days, timeslot.start_time, timeslot.end_time].join(" ")  }.join("\n "),  
-        employee.locations.where(name: "Manhattan").map{|location| location.name}.join(" "),
+      Employee.all.joins(:locations).where('locations.name = ?', "Bronx").where(approved: true).each {|employee| 
+        emp<<  [employee.full_name , employee.timeslots.where(approved: false).where(location_id:3).map{|timeslot| [timeslot.days, timeslot.start_time, timeslot.end_time].join(" ")  }.join("\n "),  
+        employee.locations.where(name: "Bronx").map{|location| location.name }.join(" "),
         EmployeeSubject.where(employee_id: employee.id).map{|c| c.courses_tutored}.join(" ") ]}
     
         ([["Tutors", "schedule", "Campus", "Subjects/Courses"]]  + emp)

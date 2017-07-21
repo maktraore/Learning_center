@@ -30,13 +30,58 @@ class EmployeesController < ApplicationController
       end
    end
   end
-
+  def bronx_schedule_pdf
+      respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = BronxSchedulePdf.new(@employees)
+        
+        send_data pdf.render, filename:"bronx.pdf", disposition: "inline",
+                                                type: "application/pdf"
+      end
+   end
+  end
+  def dobbs_ferry_schedule_pdf
+      respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = DobbsFerrySchedulePdf.new(@employees)
+        
+        send_data pdf.render, filename:"dobbs_ferry.pdf", disposition: "inline",
+                                                type: "application/pdf"
+      end
+   end
+  end
+  def york_town_schedule_pdf
+      respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = YorkTownSchedulePdf.new(@employees)
+        
+        send_data pdf.render, filename:"york_town.pdf", disposition: "inline",
+                                                type: "application/pdf"
+      end
+   end
+  end
+   def online_schedule_pdf
+      respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = OnlineSchedulePdf.new(@employees)
+        
+        send_data pdf.render, filename:"online.pdf", disposition: "inline",
+                                                type: "application/pdf"
+      end
+   end
+  end
   def show
-    @students = current_user.chatrooms
+    if current_user
+    @chatrooms = current_user.chatrooms
+    else
     @employee = Employee.find_by(id:params[:id])
     @current_user_photo = Photo.where(employee_id: @employee.id).last
     @locations = Location.all
-    # @rooms = 
+    end
   end
 
   def new

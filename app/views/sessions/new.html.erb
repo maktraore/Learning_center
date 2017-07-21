@@ -8,7 +8,8 @@
   </div>
   <input class="right" type="submit" value="Log In">
 <% end %>
+  <h3>Sign up for a student account in order to be able to chat with a tutor <a href="/students/signup">Sign Up</a></h3> 
 <% if !request.path.include?("students") %>
-<p>Are you a tutor and don't have an account? <a href="/employees/new">Create a tutor account</a></p>
-<p>Are you a student ? <a href="/students/login">Log in here</a></p>
+<h3>Are you a tutor and don't have an account? <a href="/employees/new">Create a tutor account</a></h3>
+<h3>Are you a student ? <a href="/students/login">Log in here</a></h3>
 <% end %>

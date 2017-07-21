@@ -11,6 +11,9 @@ class EmployeesSchedulesPdf < Prawn::Document
         # columns(3).row_span = 2
         columns(1..3).align =  :left
         rows(1).align = :justify
+        columns(0).width = 100
+        columns(3).width = 130
+        columns(1).width = 220
         self.row_colors = ["dddddd", "ffffff"]
         self.header = true
       end

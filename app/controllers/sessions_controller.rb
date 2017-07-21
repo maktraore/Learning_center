@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
         elsif user && user.authenticate(params[:password]) 
           session[:user_id] = user.id
           flash[:success] = 'Successfully logged in!'
-          redirect_to '/messages' 
+          redirect_to '/' 
         # elsif employee && employee.authenticate(params[:password])
           # session[:employee_id] = employee.id
           # flash[:success] = 'Successfully logged in!'
@@ -56,8 +56,11 @@ class SessionsController < ApplicationController
       end
     end
     def destroy
+      if current_user
       session[:employee_id] = nil
+      elsif  current_student
       session[:user_id] = nil
+      end
       flash[:success] = 'Successfully logged out!'
       redirect_to '/'
     end

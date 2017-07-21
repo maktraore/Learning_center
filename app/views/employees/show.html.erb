@@ -66,7 +66,7 @@
   <% if current_user &&current_user.full_name==  @employee.full_name %>     
     <div class="little_right">
       <h4>List of communications</h4>
-      <% @students.each_slice(2) do |chatroom_slice|  %>
+      <% @chatrooms.each_slice(2) do |chatroom_slice|  %>
           <div class="col-md-2">
           <% chatroom_slice.each do |chatroom| %>
             <%= link_to "Chat with #{chatroom.user.name }", room_path(chatroom), class: 'btn btn-primary sm-scroll margin-top-10 wow bounceIn', 'data-wow-delay': '1.0s' %>

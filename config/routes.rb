@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     end
   end
   get "/manhattan", to:'employees#manhattan_schedule_pdf'
+  get "/bronx", to:'employees#bronx_schedule_pdf'
+  get "/dobbs_ferry", to:'employees#dobbs_ferry_schedule_pdf'
+  get "/york_town", to:'employees#york_town_schedule_pdf'
+  get "/online", to:'employees#online_schedule_pdf'
   # get "/messages", to: "messages#index"
   get "/new_email", to: 'messages#new_email'
   post "/new_email", to: 'messages#create_email'
