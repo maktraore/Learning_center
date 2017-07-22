@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   before_action :authenticate_all, only: :index
   def create
     if current_student
-    @message = Message.create(
+      @message = Message.create(
       body: params[:body], 
       user_id: current_student.id, 
       chatroom_id: params[:chatroom_id]
@@ -14,15 +14,6 @@ class MessagesController < ApplicationController
       chatroom_id: params[:chatroom_id]
       )
     end  
-    # if @message.save
-    #   ActionCable.server.broadcast "room_channel", 
-    #   # ActionCable.server.broadcast "messages", 
-    #   content: @message.body, 
-    #   room_id: message.room_id,
-    #   username: @message.user.name
-    #   head :ok
-    # end
-
   end
 
   def index

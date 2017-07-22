@@ -77,6 +77,9 @@ class EmployeesController < ApplicationController
   def show
     if current_user
     @chatrooms = current_user.chatrooms
+    @employee = Employee.find_by(id:params[:id])
+    @current_user_photo = Photo.where(employee_id: @employee.id).last
+    @locations = Location.all
     else
     @employee = Employee.find_by(id:params[:id])
     @current_user_photo = Photo.where(employee_id: @employee.id).last

@@ -19,7 +19,16 @@
     <div class="listings_direct-messages">
       <h2 class="listings_header">List of names this user has talked to</h2>
       <ul class="channel_list">
-        <li class="channel">
+        <li class="channel ">
+        <% if @chatrooms_employee %>
+        <% @chatrooms_employee.each do |chatroom| %>
+            <%= link_to "#{chatroom.user.name}", room_path(chatroom) %></br> 
+             <% end %>
+            <% elsif @chatrooms_students %>
+            <% @chatrooms_students.each do |chatroom| %>
+            <%= link_to "#{chatroom.employee.full_name}", room_path(chatroom)%><br> 
+             <% end %>
+             <% end %>
         </li>
       </ul>
     </div>

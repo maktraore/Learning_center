@@ -1,6 +1,7 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 .reset_2, caption, th, td {
   text-align: left;
   font-weight: normal;
@@ -185,7 +186,7 @@ main {
   border-bottom-right-radius: 0.25rem;
   margin-right: 17px;
   color: #ffffff;
-  padding-left: 1rem;
+  padding-left: 0rem;
 }
 .channel.active {
   background: #4c9689;
@@ -320,3 +321,4 @@ main {
   min-height: 41px !important;
   padding: 9px 5px 9px 8px;
 }
+
