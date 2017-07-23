@@ -7,5 +7,6 @@ json.array! @messages.each do |message|
     json.name message.employee.full_name
   end
   json.chatroom_id message.chatroom_id
+  json.read message.read
   json.created_at message.created_at
 end

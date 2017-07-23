@@ -22,11 +22,11 @@
         <li class="channel ">
         <% if @chatrooms_employee %>
         <% @chatrooms_employee.each do |chatroom| %>
-            <%= link_to "#{chatroom.user.name}", room_path(chatroom) %></br> 
+            <%= link_to "#{chatroom.user.name} #{chatroom.messages.where(read: false, user_id: chatroom.user.id).count}", room_path(chatroom),id: "chatroom-#{chatroom.id}-#{chatroom.user_id}", class: "#{'room-color' if @conversation1.id == chatroom.id}" %></br> 
              <% end %>
             <% elsif @chatrooms_students %>
             <% @chatrooms_students.each do |chatroom| %>
-            <%= link_to "#{chatroom.employee.full_name} ", room_path(chatroom)%><br> 
+            <%= link_to "#{chatroom.employee.full_name} #{chatroom.messages.where(read: false, employee_id: chatroom.employee.id).count}", room_path(chatroom), id: "chatroom-#{chatroom.id}-#{chatroom.employee_id}", class: "#{'room-color' if @conversation1.id == chatroom.id}" %><br> 
              <% end %>
              <% end %>
         </li>
@@ -37,10 +37,16 @@
     <%= render @messages %>
   </div>
   
+
+
 </div>
 <div class="footer">
 <div style="position: relative; width: 100%; height: 2em; bottom: 0; left: 225px;">
-    <input type="text"  id="message_input" class="input-box" placeholder="Type your message here and press enter to send"/>
+  <% if current_user %>
+    <input type="text"  id="message_input" class="input-box" placeholder="Type your message here and press enter to send" onclick="markRead(<%= @conversation1.id %>, <%= @conversation1.user.id %>, null, '<%= @conversation1.user.name %>')"/>
+    <% elsif current_student %>
+    <input type="text"  id="message_input" class="input-box" placeholder="Type your message here and press enter to send" onclick="markRead(<%= @conversation1.id %>, null, <%= @conversation1.employee.id %>, '<%= @conversation1.employee.full_name %>')"/>
+    <% end %>
   </div>
   <div class="user-menu">
   <% if current_student %>
@@ -54,6 +60,9 @@
    
     <input type="hidden" value="<%= params[:id] %>" id="conversation_id">
     <input type="hidden" value="<%= current_user.id %>" id="employee_id">
+    
+    <!-- <input type="hidden" value="<%= current_student ? @conversation1.employee_id : @conversation1.user_id %>" id="recipient_id">
+    <input type="hidden" value="<%= current_student ? @conversation1.employee.full_name : @conversation1.user.name %>" id="recipient_name"> -->
     <% end %>
   </div>
 </div>

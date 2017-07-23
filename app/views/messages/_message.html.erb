@@ -1,8 +1,8 @@
 <div class=“message”>
 <% if current_student && message.user %>
-     <a href=“” class=“message_username”><%= message.user.name %></a>
+     <p class=“message_username”><b><%= message.user.name %></b> 
      <span class=“message_timestamp”>
-       <%= message.created_at %>
+       <%= message.created_at%></p>
      </span>
      <span class=“message_timestamp”>
      </span>
@@ -11,7 +11,7 @@
        <h4><%= message.body%></h4>
      </span>
 <% elsif  message.employee%>
-     <a href=“” class=“message_username”><%= message.employee.full_name %></a>
+     <a href='/employees/<%= message.employee.id %>' class=“message_username”><%= message.employee.full_name %></a>
      <span class=“message_timestamp”>
        <%= message.created_at %>
      </span>
@@ -24,7 +24,7 @@
 <% elsif  current_user && message.employee   %>
 </div>
 
-     <a href=“” class=“message_username”><%= message.employee.full_name %></a>
+     <a href='/employees/<%= message.employee.id %>' class=“message_username”><%= message.employee.full_name %></a>
      <span class=“message_timestamp”>
        <%= message.created_at %>
      </span>
@@ -35,9 +35,9 @@
        <h4><%= message.body%></h4>
      </span>
 <% elsif  message.user %>
-     <a href=“” class=“message_username”><%= message.user.name %></a>
+     <p class=“message_username”><b><%= message.user.name %></b> 
      <span class=“message_timestamp”>
-       <%= message.created_at %>
+       <%= message.created_at %></p>  
      </span>
      <span class=“message_timestamp”>
      </span>

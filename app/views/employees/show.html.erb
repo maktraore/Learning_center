@@ -70,7 +70,7 @@
       <% @chatrooms.each_slice(2) do |chatroom_slice|  %>
           <div class="col-md-2">
           <% chatroom_slice.each do |chatroom| %>
-            <p><%= link_to "Chat with #{chatroom.user.name}", room_path(chatroom), class: 'btn btn-primary sm-scroll margin-top-10 wow bounceIn', 'data-wow-delay': '1.0s' %></p> 
+            <p><%= link_to "Chat with #{chatroom.user.name}", room_path(chatroom), class: 'btn btn-primary sm-scroll margin-top-10 wow bounceIn', 'data-wow-delay': '1.0s' %> inbox (<%=  chatroom.messages.where(read: false, user_id: chatroom.user.id).count %>)</p> 
              <% end %>
           </div>
         <% end %>
