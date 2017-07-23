@@ -5,13 +5,15 @@ class MessagesController < ApplicationController
       @message = Message.create(
       body: params[:body], 
       user_id: current_student.id, 
-      chatroom_id: params[:chatroom_id]
+      chatroom_id: params[:chatroom_id],
+      read: false
       )
     else
       @message = Message.create(
       body: params[:body], 
       employee_id: current_user.id, 
-      chatroom_id: params[:chatroom_id]
+      chatroom_id: params[:chatroom_id],
+      read: false
       )
     end  
   end
@@ -35,7 +37,7 @@ class MessagesController < ApplicationController
 
   def create_email
     email_hash = {body: params[:body], email: params[:email]}
-    UserMailer.contact_by_email(email_hash).deliver_now
+    UserMailer.contact_by_email(email_hash).deliver_later
     redirect_to '/employees'
   end
 end

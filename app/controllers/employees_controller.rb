@@ -139,14 +139,9 @@ class EmployeesController < ApplicationController
  
 
         # Tell the UserMailer to send a welcome email after save
-    UserMailer.welcome_email(@employee).deliver_now
+    UserMailer.welcome_email(@employee).deliver_later
  
     redirect_to "/employees" 
-    
-      # flash[:success] = "#{employee.name} has been sign up"
-      # redirect_to "/login"
-      # else
-      # flash[:error] = "Please try again later"
       
   end
 

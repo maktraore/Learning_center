@@ -11,6 +11,7 @@ $(document).on 'keypress', '#message_input', (e) ->
     $conversation_id = $('#conversation_id').val()
     $user_id = $('#user_id').val()
     $employee_id = $('#employee_id').val()
+    $employee_id = $('#employee_id').val()
     App.room.speak(e.target.value, $conversation_id, $user_id, $employee_id)
     e.target.value = ''
     e.preventDefault()

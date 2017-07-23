@@ -11,8 +11,9 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Thank you for signing up for a learning center tutor account')
   end
   def contact_by_email(email_hash)
-    @email = email_hash
+    @email = email_hash[:email]
+    @body = email_hash[:body]
     @url = 'http://localhost:3000/new_email'
-    mail(to: "newamericanrealty.seyba@gmail.com", subject: 'Web message')
+    mail(to: "maktraore2005@yahoo.fr", subject: 'Web message')
   end
 end

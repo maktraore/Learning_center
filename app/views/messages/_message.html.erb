@@ -21,10 +21,9 @@
      <span class=“message_content”>
        <h4><%= message.body%></h4>
      </span>
-<% end %>
+<% elsif  current_user && message.employee   %>
 </div>
-<div class=“message”>
-<% if current_user && message.employee %>
+
      <a href=“” class=“message_username”><%= message.employee.full_name %></a>
      <span class=“message_timestamp”>
        <%= message.created_at %>

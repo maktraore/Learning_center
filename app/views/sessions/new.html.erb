@@ -1,7 +1,7 @@
 <h1>Login</h1>
 <%= form_tag @url, method: :post do %>
   <div class="right">
-    Email: <input type="email" name="email">
+    Email: <input type="email" name="email" value="<%= params[:email] %>">
   </div>
   <div class="right">
     Password: <input type="password" name="password">

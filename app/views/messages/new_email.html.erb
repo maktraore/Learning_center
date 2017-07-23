@@ -1,5 +1,5 @@
 <%= form_tag "/new_email", method: :post do %>
-Email: <input type="email" name="email"> <br>
-Body: <textarea name="body" icols="30" rows="10"></textarea><br>
+Email: <input type="email" required name="email"> <br>
+Body: <textarea name="body" icols="30" rows="10" required ></textarea><br>
 <button>Send email</button>
 <% end %>

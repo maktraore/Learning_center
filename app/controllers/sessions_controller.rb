@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
     def new
       if request.path.include?("student")
          if current_student
-          redirect_to "/messages" and return
+          redirect_to "/" and return
         end
         @url = "/students/login"
       else
@@ -26,8 +26,9 @@ class SessionsController < ApplicationController
           # flash[:success] = 'Successfully logged in!'
           # redirect_to '/messages' 
         else
-          flash[:warning] = 'Invalid email or password!'
-          redirect_to 'students/login'
+            @user = User.new(email: params[:email])
+          flash[:warning] = 'Invalid Tutor email or password!'
+          render :new
         end
       else
         employee = Employee.find_by(email: params[:email])
@@ -38,7 +39,7 @@ class SessionsController < ApplicationController
           flash[:success] = "#{employee.full_name} has been logged in successfully."
           redirect_to "/employees"
          else
-           flash[:warning] = 'Invalid email or pasword'
+           flash[:warning] = 'Invalid student email or pasword'
            redirect_to "/login"
         end
       end

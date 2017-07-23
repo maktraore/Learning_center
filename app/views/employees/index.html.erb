@@ -10,7 +10,6 @@
 Hi <%= current_user.full_name %> 
 <% end %>
 <% if current_student %>
-<a href="/new_email">Send an email</a>
 <% end %>
 </p>
  <% @employees.where(approved:true).each_slice(3) do |employee_slice| %>

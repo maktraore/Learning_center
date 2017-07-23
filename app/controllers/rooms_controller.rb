@@ -12,6 +12,11 @@ class RoomsController < ApplicationController
       @chatrooms_students = current_student.chatrooms if current_student
     end
     conversation1 = Chatroom.find_by(id: params[:id])
-    @messages = (conversation1.messages).sort_by{|msg| msg.created_at}
+    if conversation1.messages.length > 4
+      conversation1.messages.order('created_at ASC').limit(2).destroy_all
+      @messages = (conversation1.messages).sort_by{|msg| msg.created_at}
+    else
+      @messages = (conversation1.messages).sort_by{|msg| msg.created_at}
+    end
   end
 end
