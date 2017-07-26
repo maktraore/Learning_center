@@ -36,8 +36,9 @@ class MessagesController < ApplicationController
   end
 
   def create_email
-    email_hash = {body: params[:body], email: params[:email]}
+    email_hash = {body: params[:body], full_name: params[:full_name], email: params[:email]}
     UserMailer.contact_by_email(email_hash).deliver_later
+    flash[:success]= "Email sent!"
     redirect_to '/employees'
   end
 end
