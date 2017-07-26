@@ -13,7 +13,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
          <ul class="nav navbar-nav">
-            <li><a class="navbar-brand" href="/">My Learning Center </a></li><
+            <li><a class="navbar-brand" href="/">My Learning Center<span class="sr-only"></span></a></li>
+            <li ><a href="/"></a></li>
+            <li ><a href="/"></a></li>
             <li ><a href="/surveys">Survey<span class="sr-only"></span></a></li>
             <li ><a href="/contact">Contact us<span class="sr-only"></span></a></li>
             <li class="dropdown">
@@ -46,13 +48,17 @@
               </ul>
            </li>
            <% if current_user %>
-             <p class="navbar-brand navbar-right left" ><a  href="/logout">log out </a></p>
+             <p class="navbar-brand navbar-right left" >
+             Hi <%= current_user.full_name %> 
+             <a  href="/logout">log out </a></p>
             <% else %>
            <li><a href="/employees/new">Create a tutor account</a></li>
              <p class="navbar-brand navbar-right" ><a  href="/login">sign in </a></p>
             <% end %>
             <% if current_student %>
-             <p class="navbar-brand navbar-right left" ><a  href="/students/logout">Student log out </a></p>
+             <p class="navbar-brand navbar-right left" >
+             Hi <%= current_student.name %> 
+             <a  href="/students/logout">Student log out </a></p>
             <% end %>
          </ul>
        </div><!-- /.container-fluid -->

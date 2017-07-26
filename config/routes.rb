@@ -1,9 +1,26 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
+  # namespace :api do
+  #   namespace :v1 do
+  #     get 'surveys/index'
+  #   end
+  # end
+
+  # namespace :api do
+  #   namespace :v1 do
+  #     get 'surveys/show'
+  #   end
+  # end
+
   namespace :api do
     namespace :v1 do
       resources :messages, only: [:index, :create]
       patch "/messages", to: 'messages#update'
+      resources :surveys, only: [:index, :show]
     end
   end
   mathjax 'mathjax'
@@ -17,7 +34,7 @@ Rails.application.routes.draw do
   post "/new_email", to: 'messages#create_email'
 
   get "/students/signup", to: "users#new"
-  post "/users", to: "users#create"
+  post "/students/signup", to: "users#create"
   get "/students/login", to: "sessions#new"
   post "/students/login", to: "sessions#create"
   get "/students/logout", to: "sessions#destroy"
@@ -36,9 +53,10 @@ Rails.application.routes.draw do
   resources :employees do
     resources :schedules
   end
+  resources :account_activations, only: [:edit]
   resources :rooms, except: [:edit, :update, :destroy] 
   resources :messages, only: [:index, :create, :show]
-
+  resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :chatrooms, only: [:show, :create]
   resources :locations
   resources :subjects
@@ -52,7 +70,8 @@ Rails.application.routes.draw do
   post "/login", to:'sessions#create'
   get "/logout", to: 'sessions#destroy'
   get "/newpassword", to: 'sessions#edit'
-  post "/newpassword", to: 'sessions#update'
+  post "/newpassword", to: 'sessions#create'
+  patch "/newpassword", to: 'sessions#update'
   get "/photos", to: 'photos#new'
   post "/photos", to: 'photos#create'
   get "/photos", to: 'photos#edit'

@@ -1,64 +1,29 @@
-<h3>Thank you in advance for taking 5 minutes of your time filling out this survey</h3>
-<%= form_tag "/surveys", method: :post do %>
-<p>Email: <input type="email" name="student_email"></p>
-<ol>
-  <p><li>At campus did your tutoring session take place?</li></p>
-  <p>
-  <% Location.all.each do |location| %>
-  <input type="radio" required name="question1" value="<%= location.name %>"> <%= location.name %>
-  <% end %>
-  </p>
-  <p><li>What subject were you tutored today</li></p>
-  <% Subject.all.each do |subject| %>
-  <input type="radio" required name="question2" value="<%= subject.department %>"> <%= subject.department %>
-  <% end %>
-  <p><li>How did you first hear about Learning center?</li></p>
-  <input type="radio" required name="question3" value="Teacher">Teacher
-  <input type="radio" required name="question3" value="Librarian"> Librarian
-  <input type="radio" required name="question3" value="Fellow Student"> Fellow student
-  <input type="radio" required name="question3" value="College website"> College website
-  <input type="radio" required name="question3" value="other"> Other
-  <p><li>Are you a</li></p>
-  <input type="radio" required name="question4" value="Freshman">Freshman
-  <input type="radio" required name="question4" value="Sophomore">Sophomore
-  <input type="radio" required name="question4" value="Junior">Junior
-  <input type="radio" required name="question4" value="Senior">Senior
-  <input type="radio" required name="question4" value="Grad Student">Grad Student
-  <input type="radio" required name="question4" value="Other">Other
-  <p><li>My tutor was knowledgeable about the subject being tutored</li></p>
-  <input type="radio" required name="question5" value="Strongly agree">Strongly agree
-  <input type="radio" required name="question5" value="Agree">Agree
-  <input type="radio" required name="question5" value="Neutral">Neutral
-  <input type="radio" required name="question5" value="Disagree">Disagree
-  <input type="radio" required name="question5" value="Strongly disagree">Strongly disagree
-  <p><li>After my session I feel more comfortable about the subject under discussion</li></p>
-  <input type="radio" required name="question6" value="Strongly agree">Strongly agree
-  <input type="radio" required name="question6" value="Agree">Agree
-  <input type="radio" required name="question6" value="Neutral">Neutral
-  <input type="radio" required name="question6" value="Disagree">Disagree
-  <input type="radio" required name="question6" value="Strongly disagree">Strongly disagree
-  <p><li>Based on my experience today, I will recommend the learning center service to another student</li></p>
-  <input type="radio" required name="question7" value="Strongly agree">Strongly agree
-  <input type="radio" required name="question7" value="Agree">Agree
-  <input type="radio" required name="question7" value="Neutral">Neutral
-  <input type="radio" required name="question7" value="Disagree">Disagree
-  <input type="radio" required name="question7" value="Strongly disagree">Strongly disagree
-  <p><li>Over all my experience at the learning center was</li></p>
-  <input type="radio" required name="question8" value="Excellent">Excellent
-  <input type="radio" required name="question8" value="Good">Good
-  <input type="radio" required name="question8" value="Fair">Fair
-  <input type="radio" required name="question8" value="Poor">Poor
- disagree
- <p><li>Why did come to this tutoring session today?</li> </p>
-  <textarea required name="question10" icols="60" rows="4"></textarea>
-  <p><li>What did learn that was new during this tutoring session?</li></p>
-  <textarea required name="question11" icols="60" rows="4"></textarea>
-  <p><li> What would do next to ensure that you do well in this class?</li></p>
-  <textarea required name="question12" icols="60" rows="4"></textarea>
-  <p><li>What else could we do to help you do well in this class</li></p>
-    <textarea required name="question9" icols="60" rows="4"></textarea>
-  <p><li>Additional comments</li></p>
-  <textarea required name="question13" icols="60" rows="4"></textarea>
-</ol>
-<input class="btn" type="submit" value="Send survey">
-<% end %>
+<!-- <div id="survey">
+    <h2 v-if=show>{{ question1 }}</h2>
+    <input v-if=show type="number" v-model="answer13">
+    <h2 v-if="!show">{{ question2 }}</h2>
+    <input v-if="!show" type="number" v-model="answer10">
+    <br>
+<div class='button' id='next'><a href='#' @click="show = !show">Next</a></div>
+<div class='button' id='prev'><a href='#' @click="show = show">Prev</a>
+</div>
+</div> -->
+<div id="survey">
+  <div v-for = "question in nextArr">
+      <h2>{{ question.text }}</h2>
+      <input v-model="question.answer">
+  </div>
+    <div id="prev-next">
+      <a href='#' @click="next">Previous</a> 
+      <a href='#' @click="next">Next</a> 
+    </div>
+</div>
+
+
+
+
+<!-- </div>
+ -->
+ 
+
+

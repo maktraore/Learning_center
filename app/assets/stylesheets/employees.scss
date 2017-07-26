@@ -11,13 +11,28 @@
 .far_right {
   float: right;
 }
-// .center {
-//     margin: 5px 0;
-//     width: calc(100% - 460px);
+.center {
+    margin: 5px 0;
+    width: calc(100% - 460px);
+}
+.middletext {
+  vertical-align: middle;
+}
+.test-padding {
+  padding-top:  -165px;
+}
+// .navbar {
+//   height: 50px;
 // }
-// .middletext {
-//   vertical-align: middle;
+// .align-right {
+//   text-align: right;
 // }
-// .test-padding {
-//   padding-top:  -165px;
+// .form-input {
+//   width: 100%;
+// }
+
+
+// .navbar .navbar-collapse {
+//   background: white;
+//   float: right;
 // }

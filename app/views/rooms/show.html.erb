@@ -9,17 +9,12 @@
   <div class="listings">
     <div class="listings_channels">
       <h2 class="listings_header"></h2>
-      <ul class="channel_list">
-        <li class="channel active">
-        </li>
-        <li class="channel">
-        </li>
-      </ul>
     </div>
     <div class="listings_direct-messages">
-      <h2 class="listings_header">List of names this user has talked to</h2>
+      <h2 class="listings_header">List of names I have talked to</h2>
       <ul class="channel_list">
         <li class="channel ">
+
         <% if @chatrooms_employee %>
         <% @chatrooms_employee.each do |chatroom| %>
             <%= link_to "#{chatroom.user.name} #{chatroom.messages.where(read: false, user_id: chatroom.user.id).count}", room_path(chatroom),id: "chatroom-#{chatroom.id}-#{chatroom.user_id}", class: "#{'room-color' if @conversation1.id == chatroom.id}" %></br> 
@@ -27,6 +22,7 @@
             <% elsif @chatrooms_students %>
             <% @chatrooms_students.each do |chatroom| %>
             <%= link_to "#{chatroom.employee.full_name} #{chatroom.messages.where(read: false, employee_id: chatroom.employee.id).count}", room_path(chatroom), id: "chatroom-#{chatroom.id}-#{chatroom.employee_id}", class: "#{'room-color' if @conversation1.id == chatroom.id}" %><br> 
+             <% #end %>
              <% end %>
              <% end %>
         </li>
@@ -60,7 +56,7 @@
    
     <input type="hidden" value="<%= params[:id] %>" id="conversation_id">
     <input type="hidden" value="<%= current_user.id %>" id="employee_id">
-    
+
     <!-- <input type="hidden" value="<%= current_student ? @conversation1.employee_id : @conversation1.user_id %>" id="recipient_id">
     <input type="hidden" value="<%= current_student ? @conversation1.employee.full_name : @conversation1.user.name %>" id="recipient_name"> -->
     <% end %>

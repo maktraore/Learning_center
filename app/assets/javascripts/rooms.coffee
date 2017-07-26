@@ -5,7 +5,7 @@
 $ ->
   $messages = $('#messages')
   $messages.scrollTop($messages[0].scrollHeight)
-  $('#message_input').focus()
+  # $('#message_input').focus()
 $(document).on 'keypress', '#message_input', (e) ->
   if e.keyCode == 13 and e.target.value
     $conversation_id = $('#conversation_id').val()

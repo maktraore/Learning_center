@@ -55,5 +55,22 @@
 #  end
 #  5.times do 
 #   Subject.create(department: Math)
-# end
+#  end
+# User.create(name:  "student6",
+#              email: "student6@gmail.com",
+#              password:              "password",
+#              password_confirmation: "password",
+#              activated: true,
+#              activated_at: Time.zone.now)
 
+# 6.upto(10) do |n|
+#   name  = "student"+n.to_s
+#   email = "student#{n}@gmail.com"
+#   password = "password"
+#   User.create(name:  name,
+#               email: email,
+#               password:  password,
+#               password_confirmation: password,
+#               activated: true,
+#               activated_at: Time.zone.now)
+# end

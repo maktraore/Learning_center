@@ -1,47 +1,96 @@
 <div class="container">
-<h3>Edit Tutor's info</h3>
-<%= form_tag "/employees/#{@employee.id}", method: :patch do %>
-<p>Full Name: <input type="text" name="full_name" value="<%= @employee.full_name %>"></p>
-<p>Email: <input type="email" name="email" value="<%= @employee.email %>"></p>
-<p>Phone number: <input type="text" name="phone_number" value="<%= @employee.phone_number %>"></p>
-<p>Courses Tutored: <input type="textarea" name="courses_tutored_1" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first.courses_tutored if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first%>">
-<select name="department_1">
-<option value>--select department--</option>
-              <% @subjects.each do |subject| %>
-              <% if @emp_subjects_arr && @emp_subjects_arr.include?(subject.department)%>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h2>Edit Tutor's info</h2>
+      <div class="well">
+        <%= form_tag "/employees", method: :post, class: "form-horizontal"  do %>
+          <div class="form-group">
+            <label>Full Name:</label>
+            <div class="col-xs-12">
+              <input class="form-input" name="full_name" value="<%= @employee.full_name %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email:</label>
+            <div class="col-xs-12">
+              <input class="form-input" type="email" name = "email" value="<%= @employee.email %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Phone Number:</label>
+            <div class="col-xs-12">
+              <input class="form-input" type="text" name="phone_number" value="<%= @employee.phone_number %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Courses Tutored:</label>
+            <div class="col-xs-12">
+              <input type="textarea" name="courses_tutored_1" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first.courses_tutored if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first%>">
+              <select name="department_1">
+                <option  value> -- select an department -- </option>
+                <% @subjects.each do |subject| %>
+                 <% if @emp_subjects_arr && @emp_subjects_arr.include?(subject.department)%>
                   <option selected value="<%= subject.id%>"><%= @emp_subjects_arr.first  %></option>
-                <% else %>
+                   <% else %>
                   <option value="<%= subject.id%>"><%= subject.department %></option>
+                <% end %>
               <% end %>
-            <% end %>
-      </select>
-      <%if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first %>
-      <%= link_to "delete", "/employee_subjects/#{EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first.id}", method: :delete %>
+              </select>
+                <%if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first %>
+                <%= link_to "delete", "/employee_subjects/#{EmployeeSubject.where(employee_id: @employee.id).order(:created_at).first.id}", method: :delete %>
       <% end %>
-<p>Courses Tutored: <input type="textarea" name="courses_tutored_2" value="<%= EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second.courses_tutored if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second %>"> 
-      <select name="department_2">
-             <option value>--select department--</option>
-             <% @subjects.each do |subject| %>
-              <% if @emp_subjects_arr && @emp_subjects_arr.second  && @emp_subjects_arr.include?(subject.department)%>
-                  <option selected value="<%= subject.id%>"><%= @emp_subjects_arr.second  %></option>
-                <% else %>
-                  <option value="<%= subject.id%>"><%= subject.department %></option>
-              <% end %>
-            <% end %>
-      </select>
-          <% if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Courses Tutored:</label>
+            <div class="col-xs-12">
+              <input type="textarea" name="courses_tutored_2" >
+              <select name="department_2">
+                <option value> -- select an option -- </option>
+                  <% @subjects.each do |subject| %>
+                    <option  selected value="<%= subject.id%>"><%= @emp_subjects_arr.second  %></option>
+                      <option value="<%= subject.id%>"><%= subject.department %></option>
+                  <% end %>
+              </select>
+              <% if EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second %>
           <%= link_to "delete", "/employee_subjects/#{EmployeeSubject.where(employee_id: @employee.id).order(:created_at).second.id}", method: :delete %>
-          <% end %>
-          <!-- <a href="/employees/<%# e.id %>" data-method="delete" >delete</a> -->
-</p>
-<p>Bio: <textarea class="middletext" name="bio" cols="40" rows="5" ><%= @employee.bio %></textarea></p>
-<%# if current_user && current_user.admin %>    
-<p>Approved: <input type="text" name="approved" value="<%= @employee.approved %>"></p>
-<p>Admin: <input type="text" name="admin" value="<%= @employee.admin %>"></p>
-<%# end %>
-<p><input class="btn"  type="submit"></p>
-<% end %>
+            <% end %>
+            </div>
+        
+          </div>
+           <div class="form-group">
+            <label>Bio:</label>
+            <div class="col-xs-12">
+              <textarea class="form-input" name="bio" rows="10"><%= @employee.bio %></textarea>
+            </div>
+          </div>
+          <% if current_user && current_user.admin %>   
+          <div class="form-group">
+            <label>Approved:</label>
+            <div class="col-xs-12">
+              <input type="radio" name="approved" value="true" <%= "checked" if @employee.approved  %>>Approved
+              <input type="radio" name="approved" value="false" <%= "checked" if !@employee.approved  %>>Not Approved
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Admin:</label>
+            <div class="col-xs-12">
+              <input type="radio" name="admin" value="true" <%= "checked" if @employee.admin  %>>Admin
+              <input type="radio" name="admin" value="false" <%= "checked" if !@employee.admin  %>>Not Admin
+            </div>
+        <% end %>
+          </div>
+          <button class="btn btn-success">Submit Edit</button>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<!-- @employee.subjects.order(:created_at)[i] &&@employee.subjects.order(:created_at)[i].department==subject
- -->
+
+
+
+
+

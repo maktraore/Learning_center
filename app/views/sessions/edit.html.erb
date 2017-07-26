@@ -1,19 +1,19 @@
-<h1>Change your password</h1>
-<%= form_tag "/login", method: :post do %>
-  <div class="right">
+<h1 class="little_right">Change your password</h1>
+<%= form_tag "/newpassword", method: :patch do %>
+  <div class="little_right">
     Email: <input type="email" name="email">
   </div>
-   <div class="right">
+   <!-- <div class="little_right">
     Full Name: <input type="text" name="full_name">
+  </div> -->
+  <div class="little_right">
+    Old password: <input type="password" name="oldpassword">
   </div>
-  <div class="right">
-    Old password: <input type="password" name="password">
-  </div>
-  <div class="right">
+  <div class="little_right">
     New password: <input type="password" name="newpassword">
   </div>
-  <div class ="right"> 
+  <div class ="little_right"> 
   password confirmation: <input type="password" name = "passconfirm">
   </div>
-  <input class="right" type="submit" value="submit change">
+  <input class="little_right" type="submit" value="submit change">
 <% end %>

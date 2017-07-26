@@ -1,6 +1,8 @@
 <div class=“message”>
 <% if current_student && message.user %>
-     <p class=“message_username”><b><%= message.user.name %></b> 
+<p class=“message_username” >
+<%= image_tag("https://placehold.it/30x30.png", class: " img-circle") %>
+     <b><%= message.user.name %></b> 
      <span class=“message_timestamp”>
        <%= message.created_at%></p>
      </span>
@@ -11,6 +13,13 @@
        <h4><%= message.body%></h4>
      </span>
 <% elsif  message.employee%>
+<span class=“message_username”>
+ <% if Photo.where(employee_id: message.employee.id).last %>
+            <%= image_tag(Photo.where(employee_id: message.employee.id).last.image.url, class: " img-circle") %>
+            <% else %>
+              <img class="img-circle"  src="https://placehold.it/30x30.png" > 
+    <% end %> 
+    </span>
      <a href='/employees/<%= message.employee.id %>' class=“message_username”><%= message.employee.full_name %></a>
      <span class=“message_timestamp”>
        <%= message.created_at %>
@@ -22,8 +31,11 @@
        <h4><%= message.body%></h4>
      </span>
 <% elsif  current_user && message.employee   %>
-</div>
-
+ <% if Photo.where(employee_id: message.employee.id).last %>
+            <%= image_tag(Photo.where(employee_id: message.employee.id).last.image.url, class: "img-circle") %>
+            <% else %>
+              <img  src="https://placehold.it/30x30.png" > 
+    <% end %>
      <a href='/employees/<%= message.employee.id %>' class=“message_username”><%= message.employee.full_name %></a>
      <span class=“message_timestamp”>
        <%= message.created_at %>
@@ -35,7 +47,9 @@
        <h4><%= message.body%></h4>
      </span>
 <% elsif  message.user %>
-     <p class=“message_username”><b><%= message.user.name %></b> 
+<p class=“message_username”>
+<%= image_tag("https://placehold.it/30x30.png", class: " img-circle") %>
+     <b><%= message.user.name %></b> 
      <span class=“message_timestamp”>
        <%= message.created_at %></p>  
      </span>

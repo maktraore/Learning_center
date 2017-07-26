@@ -33,6 +33,12 @@
 //   });
 
 // });
+ 
+
+
+
+
+
 
 function markRead(chatroomId, studentId, employeeId, name) {
   // post request with jquery to update the database. mark all the messages of that employee and chatroom to be read (mark as true)
@@ -50,16 +56,13 @@ function markRead(chatroomId, studentId, employeeId, name) {
           };
           var id = "chatroom-" + chatroomId + "-" + studentId;
         }
+  // create an api controller for messages to make the API call to.
          $.ajax({
           url: '/api/v1/messages' + '.json',
           type: 'PATCH',
           data: params,
           success: function(response) {
-        // $ajax.patch("/api/v1/messages.json", params).then(function(response) {
-          // channel.$forceUpdate();
-          // console.log(document.getElementById(id));
           document.getElementById(id).innerHTML = name + " " + response.count; // this number should come from the API call
           }
         });
-  // create an api controller for messages to make the API call to.
 }

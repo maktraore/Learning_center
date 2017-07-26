@@ -1,13 +1,14 @@
-<h2 class="little_right">All the tutors</h2>
-<p class="little_right">
+<h2 class="little_right">All the tutors</h2> 
+<div class="little_right">
 <%= link_to "All the schedules (pdf)", home_path(@employees, format: "pdf")  %> |
 <%= link_to "Manhattan schedules (pdf)", manhattan_path(@employees, format: "pdf")  %> |
 <%= link_to "Bronx schedules (pdf)", bronx_path(@employees, format: "pdf")  %> |
 <%= link_to "Dobbs Ferry schedules (pdf)", dobbs_ferry_path(@employees, format: "pdf")  %> |
 <%= link_to "York Town schedules (pdf)", york_town_path(@employees, format: "pdf")  %> |
 <%= link_to "Online schedules (pdf)", online_path(@employees, format: "pdf")  %>
+</div>
 <% if current_user %>
-Hi <%= current_user.full_name %> 
+
 <% end %>
 <% if current_student %>
 <% end %>
@@ -35,7 +36,7 @@ Hi <%= current_user.full_name %>
         <% e.locations.each_slice(2) do |location_slice| %>
           <!-- <div class="row well"> -->
           <% location_slice.each do |location|  %>
-            <div class="col-md-6 left ">
+            <div class="col-md-6  <%= 'align-right' if location == location_slice[1] %>">
                 <h5><%= location.name if e.timeslots.where(location_id: location.id, approved:false).any? %></h5>
                 <%  e.timeslots.where(location_id: location.id, approved:false).each do |time|%>
                 <h5 ><%= time.days %></h5>

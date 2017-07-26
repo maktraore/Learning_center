@@ -25,6 +25,7 @@ class SurveysController < ApplicationController
     # binding.pry
   end
   def show
+    @surveys= Survey.all
   end
   def edit 
   end
