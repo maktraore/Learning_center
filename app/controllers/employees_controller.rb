@@ -129,16 +129,14 @@ class EmployeesController < ApplicationController
   end
 
   def create
-    @employee = Employee.new(full_name: params[:name], email: params[:email], password: params[:password], phone_number: params[:phone_number], bio: params[:bio], approved: params[:approved], admin: params[:admin])
+    @employee = Employee.new(full_name: params[:name], email: params[:email], password: params[:password], phone_number: params[:phone_number], bio: params[:bio])
     @employee.save
     session[:employee_id] = @employee.id
     EmployeeSubject.create(employee_id: @employee.id, subject_id:  params[:department_1], courses_tutored: params[:courses_tutored_1])
     if !params[:courses_tutored_2].empty?
       EmployeeSubject.create(employee_id: @employee.id, subject_id:  params[:department_2], courses_tutored: params[:courses_tutored_2])
     end
- 
 
-        # Tell the UserMailer to send a welcome email after save
     UserMailer.welcome_email(@employee).deliver_later
  
     redirect_to "/employees" 

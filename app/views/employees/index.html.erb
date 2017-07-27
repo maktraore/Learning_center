@@ -7,11 +7,6 @@
 <%= link_to "York Town schedules (pdf)", york_town_path(@employees, format: "pdf")  %> |
 <%= link_to "Online schedules (pdf)", online_path(@employees, format: "pdf")  %>
 </div>
-<% if current_user %>
-
-<% end %>
-<% if current_student %>
-<% end %>
 </p>
  <% @employees.where(approved:true).each_slice(3) do |employee_slice| %>
 <div class="row well">
@@ -22,7 +17,7 @@
           <h3><a href="/employees/<%= e.id %>"><%= e.full_name %></a></h3>
         </div>
      <div class="panel-body">    
-     <%#if current_user && current_user.admin %>            
+     <% if current_user && current_user.admin %>            
         <p>
         <a href="/employees/<%= e.id %>/edit">Edit Profile</a> |
         <a href="/employees/<%= e.id %>/schedules/all/edit">Edit Schedule</a> |
@@ -30,15 +25,15 @@
         <a href="/employees/<%= e.id %>" data-method="delete" data-confirm="Blah blah" >Delete Tutor</a>
         </a>
         </p>
-        <%# end %>
+        <% end %>
   <h5> <%= EmployeeSubject.where(employee_id: e.id).map{|course| course.courses_tutored}.join(" ") %></h5>
       <!-- <ul> -->
         <% e.locations.each_slice(2) do |location_slice| %>
           <!-- <div class="row well"> -->
           <% location_slice.each do |location|  %>
             <div class="col-md-6  <%= 'align-right' if location == location_slice[1] %>">
-                <h5><%= location.name if e.timeslots.where(location_id: location.id, approved:false).any? %></h5>
-                <%  e.timeslots.where(location_id: location.id, approved:false).each do |time|%>
+                <h5><%= location.name if e.timeslots.where(location_id: location.id, approved:true).any? %></h5>
+                <%  e.timeslots.where(location_id: location.id, approved:true).each do |time|%>
                 <h5 ><%= time.days %></h5>
                 <p>
                 <%= time.start_time %>-<%= time.end_time %> 
@@ -46,12 +41,54 @@
                  <% end %>
              </div>
             <% end %>
-             <!-- </div> -->
         <%end %>
-      <!-- </ul> -->
     </div>
  </div>
 </div>
 <% end %>
 </div>
+<% end %>
+<% if current_user && current_user.admin %>    
+
+<% @employees.where(approved:false).each_slice(3) do |employee_slice| %>
+<div class="row well">
+  <p><% employee_slice.each do |e| %></p>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+       <div class="panel-heading">
+          <h3><a href="/employees/<%= e.id %>"><%= e.full_name %></a></h3>
+        </div>
+     <div class="panel-body">    
+     <% if current_user && current_user.admin %>            
+        <p>
+        <a href="/employees/<%= e.id %>/edit">Edit Profile</a> |
+        <a href="/employees/<%= e.id %>/schedules/all/edit">Edit Schedule</a> |
+        <a href="/employees/<%= e.id %>/schedules/new">Submit upcoming schedule</a> |
+        <a href="/employees/<%= e.id %>" data-method="delete" data-confirm="Blah blah" >Delete Tutor</a>
+        </a>
+        </p>
+        <% end %>
+  <h5> <%= EmployeeSubject.where(employee_id: e.id).map{|course| course.courses_tutored}.join(" ") %></h5>
+      <!-- <ul> -->
+        <% e.locations.each_slice(2) do |location_slice| %>
+          <!-- <div class="row well"> -->
+          <% location_slice.each do |location|  %>
+            <div class="col-md-6  <%= 'align-right' if location == location_slice[1] %>">
+                <h5><%= location.name if e.timeslots.where(location_id: location.id, approved:true).any? %></h5>
+                <%  e.timeslots.where(location_id: location.id, approved:true).each do |time|%>
+                <h5 ><%= time.days %></h5>
+                <p>
+                <%= time.start_time %>-<%= time.end_time %> 
+                </p>
+                 <% end %>
+             </div>
+            <% end %>
+        <%end %>
+    </div>
+ </div>
+</div>
+<% end %>
+</div>
+<% end %>
+
 <% end %>

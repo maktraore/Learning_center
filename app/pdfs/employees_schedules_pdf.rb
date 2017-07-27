@@ -23,7 +23,7 @@ class EmployeesSchedulesPdf < Prawn::Document
         emp = []
         employee_subjects = []
         Employee.all.where(approved: true).each {|employee| 
-          emp<<  [employee.full_name, employee.timeslots.where(approved: false).map{|timeslot| [timeslot.days, timeslot.start_time, timeslot.end_time
+          emp<<  [employee.full_name, employee.timeslots.where(approved: true).map{|timeslot| [timeslot.days, timeslot.start_time, timeslot.end_time
          ].join(" ")}.join("\n "), 
           employee.locations.map{|location| location.name }.join("\n "),
             EmployeeSubject.where(employee_id: employee.id).map{|c| c.courses_tutored}.join(" ")] }

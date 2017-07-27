@@ -1,4 +1,4 @@
-<h1>This is <%= @employee.full_name %>'s page</h1>
+<h3 class="little_right">This is <%= @employee.full_name %>'s page</h3>
 <hr>
 <% if current_user && (current_user.admin || current_user.full_name==  @employee.full_name) %> 
 <div class="little_right"> 
@@ -8,13 +8,13 @@
 <a href="/password_resets/edit">Update your password</a> 
 </div>    
 <% end %>
-<% #if current_student %>
+<% if current_student %>
 <p class="little_right"> <%= form_tag "/chatrooms", method: :post do %>
   <%= hidden_field_tag(:employee_id, @employee.id) %>
              <%= submit_tag 'Chat With User', class: 'btn btn-primary little_right sm-scroll margin-top-10 wow bounceIn', 'data-wow-delay': '1.0s'%></p>
 <% end %>
 
-<% #end %>
+<% end %>
 <hr>
 <div class="container">
   <div class="row">
@@ -36,14 +36,14 @@
       </div>
   </div>
 </div> 
-  <% if current_user &&current_user.full_name==  @employee.full_name %> 
+  <% if current_user && current_user.full_name==  @employee.full_name || current_user && current_user.admin %> 
   <div class="little_right">
-      <% if @current_user_photo %>
+      <% if @current_user_photo  %>
         <%= form_tag "/photos", method: :patch do %>
         <a href="/photos">Change profile picture</a>
         <% end %>
       <%else %>
-      <a href="/photos">Add profile picture</a>
+      <a class="right" href="/photos">Add profile picture</a>
       <% end %>
   <% end %>
   </div>
@@ -52,8 +52,8 @@
 <% @employee.locations.each_slice(3) do |location_slice|  %>
 <div class="col-md-4">
 <% location_slice.each do |location| %>
-    <h5><%= location.name if @employee.timeslots.where(location_id: location.id, approved:false).any? %></h5>
-    <%  @employee.timeslots.where(location_id: location.id, approved:false).each do |time|%>
+    <h5><%= location.name if @employee.timeslots.where(location_id: location.id, approved:true).any? %></h5>
+    <%  @employee.timeslots.where(location_id: location.id, approved:true).each do |time|%>
      <h5><%= time.days %></h5>
      <p>
       <%= time.start_time %>-<%= time.end_time %> 

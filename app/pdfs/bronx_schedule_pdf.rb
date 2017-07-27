@@ -24,7 +24,7 @@ class BronxSchedulePdf < Prawn::Document
       emp = []
       employee_subjects = []
       Employee.all.joins(:locations).where('locations.name = ?', "Bronx").where(approved: true).each {|employee| 
-        emp<<  [employee.full_name , employee.timeslots.where(approved: false).where(location_id:3).map{|timeslot| [timeslot.days, timeslot.start_time, timeslot.end_time].join(" ")  }.join("\n "),  
+        emp<<  [employee.full_name , employee.timeslots.where(approved: true).where(location_id:3).map{|timeslot| [timeslot.days, timeslot.start_time, timeslot.end_time].join(" ")  }.join("\n "),  
         employee.locations.where(name: "Bronx").map{|location| location.name }.join(" "),
         EmployeeSubject.where(employee_id: employee.id).map{|c| c.courses_tutored}.join(" ") ]}
     
