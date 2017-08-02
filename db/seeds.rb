@@ -35,15 +35,16 @@ Timeslot.create(start_time:"12:00pm",end_time:"5:00pm",semester:"Summer",days:"M
 end
 # Location.create(name:"Online", address:"Online",phone_number:"1234567890")
 # # EmployeeSubject.all.where("id> ?", 10).destroy_all
+CampusEmployee.destroy_all
 Employee.all.each do |e|
   CampusEmployee.create(employee_id: e.id, location_id: Location.pluck(:id).sample)
   CampusEmployee.create(employee_id: e.id, location_id: Location.pluck(:id).sample)
 end
-Employee.all.each do |e|
-  EmployeeSubject.create(employee_id: e.id, subject_id: Subject.pluck(:id).sample, courses_tutored: "Math116 Math105")
-  EmployeeSubject.create(employee_id: e.id, subject_id: Subject.pluck(:id).sample)
-end
-# # CampusEmployee.destroy_all
+# Employee.all.each do |e|
+#   EmployeeSubject.create(employee_id: e.id, subject_id: Subject.pluck(:id).sample, courses_tutored: "Math116 Math105")
+#   EmployeeSubject.create(employee_id: e.id, subject_id: Subject.pluck(:id).sample)
+# end
+# CampusEmployee.destroy_all
 Employee.all.each do |e|
   timeslots = Timeslot.pluck(:id).shuffle
   EmployeeTimeSlot.create(employee_id: e.id, timeslot_id: timeslots.pop)
@@ -155,41 +156,41 @@ end
 #   {location_id: 3, subject_id: 8},
 #   {location_id: 3, subject_id: 8}
 # ])
-Chatroom.create!([
-  {user_id: 2, employee_id: 3},
-  {user_id: 2, employee_id: 1},
-  {user_id: 3, employee_id: 1},
-  {user_id: 1, employee_id: 4},
-  {user_id: 1, employee_id: 9},
-  {user_id: 2, employee_id: 12},
-  {user_id: 1, employee_id: 10},
-  {user_id: 3, employee_id: 10},
-  {user_id: 3, employee_id: 11},
-  {user_id: 2, employee_id: 11},
-  {user_id: 3, employee_id: 12},
-  {user_id: 1, employee_id: 10},
-  {user_id: 1, employee_id: 11},
-  {user_id: 1, employee_id: 1},
-  {user_id: 2, employee_id: 7},
-  {user_id: 1, employee_id: 2},
-  {user_id: 6, employee_id: 3},
-  {user_id: 6, employee_id: 1},
-  {user_id: 10, employee_id: 3},
-  {user_id: 10, employee_id: 2}
-])
+# Chatroom.create!([
+#   {user_id: 2, employee_id: 3},
+#   {user_id: 2, employee_id: 1},
+#   {user_id: 3, employee_id: 1},
+#   {user_id: 1, employee_id: 4},
+#   {user_id: 1, employee_id: 9},
+#   {user_id: 2, employee_id: 12},
+#   {user_id: 1, employee_id: 10},
+#   {user_id: 3, employee_id: 10},
+#   {user_id: 3, employee_id: 11},
+#   {user_id: 2, employee_id: 11},
+#   {user_id: 3, employee_id: 12},
+#   {user_id: 1, employee_id: 10},
+#   {user_id: 1, employee_id: 11},
+#   {user_id: 1, employee_id: 1},
+#   {user_id: 2, employee_id: 7},
+#   {user_id: 1, employee_id: 2},
+#   {user_id: 6, employee_id: 3},
+#   {user_id: 6, employee_id: 1},
+#   {user_id: 10, employee_id: 3},
+#   {user_id: 10, employee_id: 2}
+# ])
 
-EmployeeSubject.create!([
-  {employee_id: 8, subject_id: 3, courses_tutored: "English"},
-  {employee_id: 12, subject_id: 1, courses_tutored: "Calculus I, Calculus II, math105,math115, math116, pre-calc"},
-  {employee_id: 4, subject_id: 1, courses_tutored: "math 116, Math 105, calculus I, calculus II"},
-  {employee_id: 5, subject_id: 3, courses_tutored: "spanish"},
-  {employee_id: 4, subject_id: 2, courses_tutored: "MBA, Statistics, Physics, Calculus"},
-  {employee_id: 10, subject_id: 5, courses_tutored: "MBA"},
-  {employee_id: 12, subject_id: 2, courses_tutored: "Biology"},
-  {employee_id: 2, subject_id: 2, courses_tutored: "business, accounting"},
-  {employee_id: 3, subject_id: 1, courses_tutored: "All levels of Math"},
-  {employee_id: 7, subject_id: 2, courses_tutored: "Statistics, bio1"}
-])
+# EmployeeSubject.create!([
+#   {employee_id: 8, subject_id: 3, courses_tutored: "English"},
+#   {employee_id: 12, subject_id: 1, courses_tutored: "Calculus I, Calculus II, math105,math115, math116, pre-calc"},
+#   {employee_id: 4, subject_id: 1, courses_tutored: "math 116, Math 105, calculus I, calculus II"},
+#   {employee_id: 5, subject_id: 3, courses_tutored: "spanish"},
+#   {employee_id: 4, subject_id: 2, courses_tutored: "MBA, Statistics, Physics, Calculus"},
+#   {employee_id: 10, subject_id: 5, courses_tutored: "MBA"},
+#   {employee_id: 12, subject_id: 2, courses_tutored: "Biology"},
+#   {employee_id: 2, subject_id: 2, courses_tutored: "business, accounting"},
+#   {employee_id: 3, subject_id: 1, courses_tutored: "All levels of Math"},
+#   {employee_id: 7, subject_id: 2, courses_tutored: "Statistics, bio1"}
+# ])
 
 
 # Message.create!([
