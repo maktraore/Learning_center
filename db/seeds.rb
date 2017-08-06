@@ -26,30 +26,30 @@
 # emp = (1..50).to_a
 # subject = (1..15).to_a
 
-20.times do 
+# 20.times do 
   # EmployeeSubject.create(
   #       employee_id: Employee.all.sample.id,
   #       subject_id: Subject.all.sample.id
   #       )
-Timeslot.create(start_time:"12:00pm",end_time:"5:00pm",semester:"Summer",days:"Mondays", location_id: Location.all.sample.id)
-end
+# Timeslot.create(start_time:"12:00pm",end_time:"5:00pm",semester:"Summer",days:"Mondays", location_id: Location.all.sample.id)
+# end
 # Location.create(name:"Online", address:"Online",phone_number:"1234567890")
 # # EmployeeSubject.all.where("id> ?", 10).destroy_all
-CampusEmployee.destroy_all
-Employee.all.each do |e|
-  CampusEmployee.create(employee_id: e.id, location_id: Location.pluck(:id).sample)
-  CampusEmployee.create(employee_id: e.id, location_id: Location.pluck(:id).sample)
-end
+# CampusEmployee.destroy_all
+# Employee.all.each do |e|
+#   CampusEmployee.create(employee_id: e.id, location_id: Location.pluck(:id).sample)
+#   CampusEmployee.create(employee_id: e.id, location_id: Location.pluck(:id).sample)
+# end
 # Employee.all.each do |e|
 #   EmployeeSubject.create(employee_id: e.id, subject_id: Subject.pluck(:id).sample, courses_tutored: "Math116 Math105")
 #   EmployeeSubject.create(employee_id: e.id, subject_id: Subject.pluck(:id).sample)
 # end
 # CampusEmployee.destroy_all
-Employee.all.each do |e|
-  timeslots = Timeslot.pluck(:id).shuffle
-  EmployeeTimeSlot.create(employee_id: e.id, timeslot_id: timeslots.pop)
-  EmployeeTimeSlot.create(employee_id: e.id, timeslot_id: timeslots.pop)
-end
+# Employee.all.each do |e|
+#   timeslots = Timeslot.pluck(:id).shuffle
+#   EmployeeTimeSlot.create(employee_id: e.id, timeslot_id: timeslots.pop)
+#   EmployeeTimeSlot.create(employee_id: e.id, timeslot_id: timeslots.pop)
+# end
 # Subject.all.each do |e|
 #   CampusSubject.create!(location_id: Location.pluck(:id).sample, subject_id: e.id)
 #   CampusSubject.create!(location_id: Location.pluck(:id).sample, subject_id: e.id)
@@ -262,17 +262,17 @@ end
 #   {body: "hi", user_id: nil, chatroom_id: 19, employee_id: 103, read: false},
 #   {body: "hi", user_id: 6, chatroom_id: 20, employee_id: nil, read: false}
 # ])
-Photo.create!([
-  {title: "seyba", image_file_name: "_MG_3053.jpg", image_content_type: "image/jpeg", image_file_size: 537907, image_updated_at: "2017-07-07 07:12:25", employee_id: 3},
-  {title: "sow", image_file_name: "google-logo.jpg", image_content_type: "image/jpeg", image_file_size: 40103, image_updated_at: "2017-07-07 07:24:29", employee_id: 3},
-  {title: "Mamadou", image_file_name: "_MG_3054.jpg", image_content_type: "image/jpeg", image_file_size: 501232, image_updated_at: "2017-07-07 07:27:47", employee_id: 3},
-  {title: "rochelle", image_file_name: "girl.jpg", image_content_type: "image/jpeg", image_file_size: 102445, image_updated_at: "2017-07-14 22:56:17", employee_id: 6}
-])
+# Photo.create!([
+#   {title: "seyba", image_file_name: "_MG_3053.jpg", image_content_type: "image/jpeg", image_file_size: 537907, image_updated_at: "2017-07-07 07:12:25", employee_id: 3},
+#   {title: "sow", image_file_name: "google-logo.jpg", image_content_type: "image/jpeg", image_file_size: 40103, image_updated_at: "2017-07-07 07:24:29", employee_id: 3},
+#   {title: "Mamadou", image_file_name: "_MG_3054.jpg", image_content_type: "image/jpeg", image_file_size: 501232, image_updated_at: "2017-07-07 07:27:47", employee_id: 3},
+#   {title: "rochelle", image_file_name: "girl.jpg", image_content_type: "image/jpeg", image_file_size: 102445, image_updated_at: "2017-07-14 22:56:17", employee_id: 6}
+# ])
 
-Survey.create!([
-  {student_email: "seyba@gmail.com", question1: "Manhattan", question2: "Math", question3: "Teacher", question4: "Freshman", question5: "Strongly agree", question6: "Strongly agree", question7: "Strongly agree", question8: "Excellent", question9: "more tutors", question10: "To learn", question11: "come back", question12: "come back", question13: "none"},
-  {student_email: "sami@actualize.co", question1: "Manhattan", question2: "Math", question3: "Teacher", question4: "Freshman", question5: "Strongly agree", question6: "Strongly agree", question7: "Strongly agree", question8: "Excellent", question9: "sdfsdfs", question10: "fsdfsfds", question11: "sfdsdfs", question12: "sdfsdfsdf", question13: "sdfsfsd"}
-])
+# Survey.create!([
+#   {student_email: "seyba@gmail.com", question1: "Manhattan", question2: "Math", question3: "Teacher", question4: "Freshman", question5: "Strongly agree", question6: "Strongly agree", question7: "Strongly agree", question8: "Excellent", question9: "more tutors", question10: "To learn", question11: "come back", question12: "come back", question13: "none"},
+#   {student_email: "sami@actualize.co", question1: "Manhattan", question2: "Math", question3: "Teacher", question4: "Freshman", question5: "Strongly agree", question6: "Strongly agree", question7: "Strongly agree", question8: "Excellent", question9: "sdfsdfs", question10: "fsdfsfds", question11: "sfdsdfs", question12: "sdfsdfsdf", question13: "sdfsfsd"}
+# ])
 # Timeslot.create!([
 #   {start_time: "12:00 pm", end_time: "5:00pm", days: "saturdays", semester: "fall", approved: true, location_id: 2},
 #   {start_time: "9:45 am", end_time: "5:00 pm", days: "Mondays", semester: "fall", approved: true, location_id: 3},

@@ -80,7 +80,21 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
-
+  
+config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => 'boiling-island-78044.herokuapp.com'}
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+# SMTP settings for gmail
+config.action_mailer.smtp_settings = {
+ :address              => "smtp.gmail.com",
+ :port                 => 587,
+ domain:  "gmail.com",
+ :user_name            => ENV['gmail_username'],
+ :password             => ENV['gmail_password'],
+ :authentication       => "plain",
+:enable_starttls_auto => true
+}
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end

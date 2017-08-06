@@ -33,8 +33,10 @@
           <% location_slice.each do |location|  %>
             <div class="col-md-6  <%= 'align-right' if location == location_slice[1] %>">
                 <h5><%= location.name if e.timeslots.where(location_id: location.id, approved:true).any? %></h5>
+                <% x=e.timeslots.where(location_id: location.id, approved:true).map{|d| d.days}.uniq %>
                 <%  e.timeslots.where(location_id: location.id, approved:true).each do |time|%>
-                <h5 ><%= time.days %></h5>
+                <h5 ><%= time.days if x.include?(time.days) %></h5>
+                <% x.delete(time.days) %>
                 <p>
                 <%= time.start_time %>-<%= time.end_time %> 
                 </p>
