@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   # before_update :encrypt_password
     def new
       if request.path.include?("student")
-         if current_student
+        if current_student
           redirect_to "/" and return
         end
         @url = "/students/login"
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
             if user.activated?
                 session[:user_id] = user.id
                 params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-              flash[:success] = "You're already logged in as an employee"
+                flash[:success] = "You're already logged in as an employee"
                 redirect_to "/"
            else
                 message  = "Account not activated. "
@@ -39,8 +39,8 @@ class SessionsController < ApplicationController
           # redirect_to '/messages' 
         else
             @user = User.new(email: params[:email])
-          flash[:warning] = 'Invalid Tutor email or password!'
-          render :new
+            flash[:warning] = 'Invalid Tutor email or password!'
+            render :new
         end
       else
         employee = Employee.find_by(email: params[:email])
