@@ -44,6 +44,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'heroku', '~> 3.99', '>= 3.99.1'
 gem 'seed_dump'
 
+gem 'mimemagic', '~> 0.4.3'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
